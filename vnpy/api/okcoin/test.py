@@ -19,7 +19,7 @@ secretKey = 'DE39326C289362C9E4E85E3575C3E080'
 api = OkCoinApi()
 
 # 连接服务器，并等待1秒
-api.connect(OKCOIN_USD, apiKey, secretKey, True)
+api.connect(OKCOIN_CNY, apiKey, secretKey, True)
 
 sleep(1)
 
