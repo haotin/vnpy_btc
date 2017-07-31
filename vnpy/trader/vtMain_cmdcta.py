@@ -37,12 +37,12 @@ def run(gateway, strategyName):
     time.sleep(2)
 
     print "start strategy %s......." % strategyName
-    mainEngine.okcoin_cnEngine.loadSetting()
-    mainEngine.okcoin_cnEngine.initStrategy(strategyName)
-    mainEngine.okcoin_cnEngine.startStrategy(strategyName)
+    mainEngine.ctaEngine.loadSetting()
+    mainEngine.ctaEngine.initStrategy(strategyName)
+    mainEngine.ctaEngine.startStrategy(strategyName)
 
 
 if __name__ == '__main__':
 
-    run("BTC", "AtrRsistrategy")
+    run("CTP", "AtrRsistrategy")
 

@@ -1,0 +1,7 @@
+[
+   {
+        "name": "strategyAtrRsi",
+        "className": "AtrRsiStrategy",
+        "vtSymbol": "BTC_cny"
+    }
+]

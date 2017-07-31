@@ -33,10 +33,10 @@ from vnpy.trader.vtEvent import *
 from vnpy.trader.vtConstant import *
 from vnpy.trader.vtGateway import VtSubscribeReq, VtOrderReq, VtCancelOrderReq, VtLogData
 from vnpy.trader.vtFunction import todayDate
-from vnpy.trader.app.ctaStrategy.ctaBase import *
+from vnpy.trader.app.btcStrategy.btcBase import *
 
 # 加载 strategy目录下所有的策略
-from vnpy.trader.app.ctaStrategy.strategy import STRATEGY_CLASS
+from vnpy.trader.app.btcStrategy.strategy import STRATEGY_CLASS
 
 ########################################################################
 class CtaEngine(object):

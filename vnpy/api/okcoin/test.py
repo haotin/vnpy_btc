@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 from vnokcoin import *
-
+import time
 # 在OkCoin网站申请这两个Key，分别对应用户名和密码
 '''
 cn_site = 'www.okcoin.cn'
@@ -9,8 +9,6 @@ cn_api_key = r'71e30296-5bf0-4200-be23-298bfebf9639'
 cn_secrect_key = r'DE39326C289362C9E4E85E3575C3E080'
 
 '''
-
-
 
 apiKey = '71e30296-5bf0-4200-be23-298bfebf9639'
 secretKey = 'DE39326C289362C9E4E85E3575C3E080'
@@ -24,15 +22,15 @@ api.connect(OKCOIN_CNY, apiKey, secretKey, True)
 sleep(1)
 
 # 测试现货行情API
-#api.subscribeSpotTicker(SYMBOL_BTC)
-#api.subscribeSpotTradeData(SYMBOL_BTC)
-api.subscribeSpotDepth(SYMBOL_BTC, DEPTH_20)
+# api.subscribeSpotTicker(SYMBOL_BTC)
+# api.subscribeSpotTradeData(SYMBOL_BTC)
+# api.subscribeSpotDepth(SYMBOL_BTC, DEPTH_20)
 #api.subscribeSpotKline(SYMBOL_BTC, INTERVAL_1M)
 
 # 测试现货交易API
 #api.subscribeSpotTrades()
-#api.subscribeSpotUserInfo()
-#api.spotUserInfo()
+# d = api.subscribeSpotUserInfo()
+api.spotUserInfo()
 #api.spotTrade(symbol, type_, price, amount)
 #api.spotCancelOrder(symbol, orderid)
 #api.spotOrderInfo(symbol, orderid)
@@ -52,5 +50,6 @@ api.subscribeSpotDepth(SYMBOL_BTC, DEPTH_20)
 #api.futureTrade(symbol, expiry, type_, price, amount, order, leverage)
 #api.futureCancelOrder(symbol, expiry, orderid)
 #api.futureOrderInfo(symbol, expiry, orderid, status, page, length)
-
+# print d
+# print time.time()
 raw_input()

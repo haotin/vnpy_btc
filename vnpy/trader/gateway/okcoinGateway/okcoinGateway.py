@@ -706,3 +706,28 @@ def generateDateTime(s):
     time = dt.strftime("%H:%M:%S.%f")
     date = dt.strftime("%Y%m%d")
     return date, time
+
+#----------------------------------------------------------------------
+def test():
+    """测试"""
+    from PyQt4 import QtCore
+    import sys
+
+    def print_log(event):
+        log = event.dict_['data']
+        print ':'.join([log.logTime, log.logContent])
+
+    app = QtCore.QCoreApplication(sys.argv)
+
+    eventEngine = EventEngine()
+    eventEngine.register(EVENT_LOG, print_log)
+    eventEngine.start()
+
+    gateway = OkcoinGateway(eventEngine)
+    gateway.connect()
+
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    test()

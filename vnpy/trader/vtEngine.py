@@ -11,7 +11,7 @@ from pymongo.errors import ConnectionFailure
 
 from vnpy.trader.vtEvent import Event as vn_event
 from vnpy.trader.language import text
-from vnpy.trader.app.ctaStrategy.ctaEngine import CtaEngine
+from vnpy.trader.app.btcStrategy.btcEngine import CtaEngine
 from vnpy.trader.app.dataRecorder.drEngine import DrEngine
 from vnpy.trader.app.riskManager.rmEngine import RmEngine
 from vnpy.trader.vtFunction import loadMongoSetting
@@ -51,7 +51,8 @@ class MainEngine(object):
         self.appDetailList = []
 
         # 扩展模块
-        self.ctaEngine = CtaEngine(self, self.eventEngine)  # cta策略运行模块
+        # self.ctaEngine = CtaEngine(self, self.eventEngine)  # cta策略运行模块
+        self.okcoin_cnEngine = CtaEngine(self, self.eventEngine)  # btc策略运行模块
         self.drEngine = DrEngine(self, self.eventEngine)    # 数据记录模块
         self.rmEngine = RmEngine(self, self.eventEngine)    # 风险管理模块
 

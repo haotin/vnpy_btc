@@ -101,7 +101,7 @@ class CtaBarData(object):
         self.volume = EMPTY_INT             # 成交量
         self.dayVolume = EMPTY_INT          # 当日累计成交量（ctp是提供这个的）
         self.openInterest = EMPTY_INT       # 持仓量
-        self.color = COLOR_EQUAL          # k 线颜色,COLOR_RED，COLOR_BLUE,COLOR_EQUAL
+        self.color = COLOR_EQUAL            # k 线颜色,COLOR_RED，COLOR_BLUE,COLOR_EQUAL
 
         self.traded = False
         self.tradeStatus = EMPTY_STRING     # 当前bar的交易情况: CTAORDER_BUY 、CTAORDER_SELL、
