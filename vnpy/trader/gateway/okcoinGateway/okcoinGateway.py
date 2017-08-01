@@ -15,7 +15,7 @@ from copy import copy
 from threading import Condition
 from Queue import Queue
 from threading import Thread
-
+import time
 from vnpy.api.okcoin import vnokcoin
 from vnpy.trader.vtGateway import *
 
@@ -102,7 +102,7 @@ class OkcoinGateway(VtGateway):
         
         self.leverage = 0
         self.connected = False
-        
+        self.qryEnabled = True
     #----------------------------------------------------------------------
     def connect(self):
         """连接"""
@@ -287,7 +287,7 @@ class Api(vnokcoin.OkCoinApi):
             def reconnect():
                 while not self.gateway.connected:            
                     self.writeLog(u'等待10秒后重新连接')
-                    sleep(10)
+                    time.sleep(10)
                     if not self.gateway.connected:
                         self.reconnect()
             
@@ -399,7 +399,7 @@ class Api(vnokcoin.OkCoinApi):
         tick.highPrice = float(rawData['high'])
         tick.lowPrice = float(rawData['low'])
         tick.lastPrice = float(rawData['last'])
-        tick.volume = float(rawData['vol'].replace(',', ''))
+        # tick.volume = float(rawData['vol'].replace(',', ''))
         #tick.date, tick.time = generateDateTime(rawData['timestamp'])
         
         newtick = copy(tick)
@@ -720,12 +720,12 @@ def test():
     app = QtCore.QCoreApplication(sys.argv)
 
     eventEngine = EventEngine()
-    eventEngine.register(EVENT_LOG, print_log)
+    # eventEngine.register(EVENT_LOG, print_log)
     eventEngine.start()
 
     gateway = OkcoinGateway(eventEngine)
     gateway.connect()
-
+    gateway.qryAccount()
     sys.exit(app.exec_())
 
 

@@ -52,7 +52,7 @@ class MainEngine(object):
 
         # 扩展模块
         # self.ctaEngine = CtaEngine(self, self.eventEngine)  # cta策略运行模块
-        self.okcoin_cnEngine = CtaEngine(self, self.eventEngine)  # btc策略运行模块
+        self.okcoinEngine = CtaEngine(self, self.eventEngine)  # btc策略运行模块
         self.drEngine = DrEngine(self, self.eventEngine)    # 数据记录模块
         self.rmEngine = RmEngine(self, self.eventEngine)    # 风险管理模块
 

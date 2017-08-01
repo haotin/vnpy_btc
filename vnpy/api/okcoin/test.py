@@ -24,13 +24,13 @@ sleep(1)
 # 测试现货行情API
 # api.subscribeSpotTicker(SYMBOL_BTC)
 # api.subscribeSpotTradeData(SYMBOL_BTC)
-# api.subscribeSpotDepth(SYMBOL_BTC, DEPTH_20)
+api.subscribeSpotDepth(SYMBOL_BTC, DEPTH_20)
 #api.subscribeSpotKline(SYMBOL_BTC, INTERVAL_1M)
 
 # 测试现货交易API
 #api.subscribeSpotTrades()
 # d = api.subscribeSpotUserInfo()
-api.spotUserInfo()
+# api.spotUserInfo()
 #api.spotTrade(symbol, type_, price, amount)
 #api.spotCancelOrder(symbol, orderid)
 #api.spotOrderInfo(symbol, orderid)

@@ -5,7 +5,7 @@ import os
 from setup_logger import setup_logger
 from vnpy.trader.util_monitor import *
 from vnpy.trader.vtEngine import MainEngine
-from vnpy.trader.gateway import okcoinGateway
+from vnpy.trader.gateway import ctpGateway
 from threading import Thread
 from datetime import datetime
 setup_logger(debug=True)
@@ -25,7 +25,7 @@ class NoUiMain(object):
         # gateway 是否连接
         self.connected = False
         # gateway 的连接名称，在vtEngine.initGateway()里面定义，对应的配置文件是 "连接名称_connect.json"，
-        self.gateway_name = 'OKCOIN'
+        self.gateway_name = 'CTP'
         # 启动的策略实例，须在catAlgo/CtaSetting.json 里面定义  [u'S28_RB1001', u'S28_TFT', u'S28_HCRB',u'atr_rsi']
         self.strategies = [u'strategyAtrRsi']
 
@@ -38,18 +38,18 @@ class NoUiMain(object):
         print u'instance mainengine'
         self.mainEngine = MainEngine()
 
-        self.mainEngine.addGateway(okcoinGateway, self.gateway_name)
+        self.mainEngine.addGateway(ctpGateway, self.gateway_name)
 
-    # def trade_off(self):
-    #     """检查现在是否为非交易时间"""
-    #     now = datetime.now()
-    #     a = datetime.now().replace(hour=2, minute=35, second=0, microsecond=0)
-    #     b = datetime.now().replace(hour=8, minute=30, second=0, microsecond=0)
-    #     c = datetime.now().replace(hour=15, minute=30, second=0, microsecond=0)
-    #     d = datetime.now().replace(hour=20, minute=30, second=0, microsecond=0)
-    #     weekend = (now.isoweekday() == 6 and now >= a) or (now.isoweekday() == 7)
-    #     off = (a <= now <= b) or (c <= now <= d) or weekend
-    #     return off
+    def trade_off(self):
+        """检查现在是否为非交易时间"""
+        now = datetime.now()
+        a = datetime.now().replace(hour=2, minute=35, second=0, microsecond=0)
+        b = datetime.now().replace(hour=8, minute=30, second=0, microsecond=0)
+        c = datetime.now().replace(hour=15, minute=30, second=0, microsecond=0)
+        d = datetime.now().replace(hour=20, minute=30, second=0, microsecond=0)
+        weekend = (now.isoweekday() == 6 and now >= a) or (now.isoweekday() == 7)
+        off = (a <= now <= b) or (c <= now <= d) or weekend
+        return off
 
     def disconnect(self):
         """"断开底层gateway的连接"""
@@ -71,16 +71,16 @@ class NoUiMain(object):
             print u'noUiMain.py checkpoint:{0}'.format(dt)
             self.mainEngine.writeLog( u'noUiMain.py checkpoint:{0}'.format(dt))
 
-        # # 定时断开
-        # if self.trade_off():
-        #     """非交易时间"""
-        #     if self.connected:
-        #         self.mainEngine.writeLog(u'断开连接{0}'.format(self.gateway_name))
-        #         self.disconnect()
-        #         self.mainEngine.writeLog(u'清空数据引擎')
-        #         self.mainEngine.clearData()
-        #         self.connected = False
-        #     return
+        # 定时断开
+        if self.trade_off():
+            """非交易时间"""
+            if self.connected:
+                self.mainEngine.writeLog(u'断开连接{0}'.format(self.gateway_name))
+                self.disconnect()
+                self.mainEngine.writeLog(u'清空数据引擎')
+                self.mainEngine.clearData()
+                self.connected = False
+            return
 
         # 交易时间内，定时重连和检查
         if not self.connected:
@@ -109,20 +109,20 @@ class NoUiMain(object):
         """启动"""
 
         # 若需要连接数据库，则启动
-        # self.mainEngine.dbConnect()
+        self.mainEngine.dbConnect()
 
         # 加载cta的配置
-        print u'load btc setting'
-        self.mainEngine.okcoinEngine.loadSetting()
+        print u'load cta setting'
+        self.mainEngine.ctaEngine.loadSetting()
 
         print u'initialize all strategies'
         # 初始化策略，如果多个，则需要逐一初始化多个
         for s in self.strategies:
             print 'init strategy {0}'.format(s)
-            self.mainEngine.okcoinEngine.initStrategy(s)
+            self.mainEngine.ctaEngine.initStrategy(s)
             # 逐一启动策略
             print 'start strategy {0}'.format(s)
-            self.mainEngine.okcoinEngine.startStrategy(s)
+            self.mainEngine.ctaEngine.startStrategy(s)
 
         # 指定的连接配置
         print u'connect gateway:{0}'.format(self.gateway_name)
@@ -142,14 +142,14 @@ class NoUiMain(object):
 
 def run_noui():
 
-    # try:
-    #     log_file_name = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-    #                                              'logs', u'noUiMain.log'))
-    # except Exception as ex:
-    #     print u'Use local dict:{0}'.format(os.getcwd())
-    #     log_file_name = os.path.abspath(os.path.join(os.getcwd(), 'logs', u'noUiMain.log'))
-    #
-    # setup_logger(filename=log_file_name, debug=False)
+    try:
+        log_file_name = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                 'logs', u'noUiMain.log'))
+    except Exception as ex:
+        print u'Use local dict:{0}'.format(os.getcwd())
+        log_file_name = os.path.abspath(os.path.join(os.getcwd(), 'logs', u'noUiMain.log'))
+
+    setup_logger(filename=log_file_name, debug=False)
     noUi = NoUiMain()
     noUi.Start()
 

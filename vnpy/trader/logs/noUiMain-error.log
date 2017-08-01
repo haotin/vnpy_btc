@@ -1,0 +1,2 @@
+ERROR: [2017-08-01 09:56:16.946][vtEngine.py:238][4452:Thread-1] MongoDB连接失败
+ERROR: [2017-08-01 10:05:52.778][vtEngine.py:238][8872:Thread-1] MongoDB连接失败
