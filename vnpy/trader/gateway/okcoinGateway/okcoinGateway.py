@@ -400,7 +400,7 @@ class Api(vnokcoin.OkCoinApi):
         tick.lowPrice = float(rawData['low'])
         tick.lastPrice = float(rawData['last'])
         # tick.volume = float(rawData['vol'].replace(',', ''))
-        #tick.date, tick.time = generateDateTime(rawData['timestamp'])
+        tick.date, tick.time = generateDateTime(rawData['timestamp'])
         
         newtick = copy(tick)
         self.gateway.onTick(newtick)
@@ -720,7 +720,7 @@ def test():
     app = QtCore.QCoreApplication(sys.argv)
 
     eventEngine = EventEngine()
-    # eventEngine.register(EVENT_LOG, print_log)
+    eventEngine.register(EVENT_LOG, print_log)
     eventEngine.start()
 
     gateway = OkcoinGateway(eventEngine)

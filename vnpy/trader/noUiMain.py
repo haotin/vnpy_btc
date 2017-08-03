@@ -40,16 +40,7 @@ class NoUiMain(object):
 
         self.mainEngine.addGateway(okcoinGateway, self.gateway_name)
 
-    # def trade_off(self):
-    #     """检查现在是否为非交易时间"""
-    #     now = datetime.now()
-    #     a = datetime.now().replace(hour=2, minute=35, second=0, microsecond=0)
-    #     b = datetime.now().replace(hour=8, minute=30, second=0, microsecond=0)
-    #     c = datetime.now().replace(hour=15, minute=30, second=0, microsecond=0)
-    #     d = datetime.now().replace(hour=20, minute=30, second=0, microsecond=0)
-    #     weekend = (now.isoweekday() == 6 and now >= a) or (now.isoweekday() == 7)
-    #     off = (a <= now <= b) or (c <= now <= d) or weekend
-    #     return off
+
 
     def disconnect(self):
         """"断开底层gateway的连接"""
@@ -71,40 +62,7 @@ class NoUiMain(object):
             print u'noUiMain.py checkpoint:{0}'.format(dt)
             self.mainEngine.writeLog( u'noUiMain.py checkpoint:{0}'.format(dt))
 
-        # # 定时断开
-        # if self.trade_off():
-        #     """非交易时间"""
-        #     if self.connected:
-        #         self.mainEngine.writeLog(u'断开连接{0}'.format(self.gateway_name))
-        #         self.disconnect()
-        #         self.mainEngine.writeLog(u'清空数据引擎')
-        #         self.mainEngine.clearData()
-        #         self.connected = False
-        #     return
 
-        # 交易时间内，定时重连和检查
-        if not self.connected:
-            self.mainEngine.writeLog(u'启动连接{0}'.format(self.gateway_name))
-            self.mainEngine.writeLog(u'清空数据引擎')
-            self.mainEngine.clearData()
-            self.mainEngine.writeLog(u'重新连接{0}'.format(self.gateway_name))
-            self.mainEngine.connect(self.gateway_name)
-            self.connected = True
-            self.disconnect_signal = 0
-            return
-        else:
-            if not self.mainEngine.checkGatewayStatus(self.gateway_name):
-                self.disconnect_signal += 1
-
-                if self.disconnect_signal >= 5:
-                    self.mainEngine.writeLog(u'检查连接{0}异常，重新启动连接'.format(self.gateway_name))
-                    self.mainEngine.writeLog(u'断开连接{0}'.format(self.gateway_name))
-                    self.disconnect()
-                    self.mainEngine.clearData()
-                    self.connected = False
-            else:
-                self.disconnect_signal = 0
-#
     def Start(self):
         """启动"""
 
