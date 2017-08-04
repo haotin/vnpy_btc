@@ -2,7 +2,7 @@
 
 import os
 
-from setup_logger import setup_logger
+from .setup_logger import setup_logger
 from vnpy.trader.util_monitor import *
 from vnpy.trader.vtEngine import MainEngine
 from vnpy.trader.gateway import okcoinGateway
@@ -27,7 +27,7 @@ class NoUiMain(object):
         # gateway 的连接名称，在vtEngine.initGateway()里面定义，对应的配置文件是 "连接名称_connect.json"，
         self.gateway_name = 'OKCOIN'
         # 启动的策略实例，须在catAlgo/CtaSetting.json 里面定义  [u'S28_RB1001', u'S28_TFT', u'S28_HCRB',u'atr_rsi']
-        self.strategies = [u'strategyAtrRsi']
+        self.strategies = ['strategyAtrRsi']
 
         self.g_count = 0
         self.disconnect_signal = 0
@@ -35,7 +35,7 @@ class NoUiMain(object):
         self.last_dt = datetime.now()
 
         # 实例化 主引擎
-        print u'instance mainengine'
+        print('instance mainengine')
         self.mainEngine = MainEngine()
 
         self.mainEngine.addGateway(okcoinGateway, self.gateway_name)
@@ -59,8 +59,8 @@ class NoUiMain(object):
         dt = datetime.now()
         if dt.hour != self.last_dt.hour:
             self.last_dt = dt
-            print u'noUiMain.py checkpoint:{0}'.format(dt)
-            self.mainEngine.writeLog( u'noUiMain.py checkpoint:{0}'.format(dt))
+            print('noUiMain.py checkpoint:{0}'.format(dt))
+            self.mainEngine.writeLog( 'noUiMain.py checkpoint:{0}'.format(dt))
 
 
     def Start(self):
@@ -70,20 +70,20 @@ class NoUiMain(object):
         # self.mainEngine.dbConnect()
 
         # 加载cta的配置
-        print u'load btc setting'
+        print('load btc setting')
         self.mainEngine.okcoinEngine.loadSetting()
 
-        print u'initialize all strategies'
+        print('initialize all strategies')
         # 初始化策略，如果多个，则需要逐一初始化多个
         for s in self.strategies:
-            print 'init strategy {0}'.format(s)
+            print('init strategy {0}'.format(s))
             self.mainEngine.okcoinEngine.initStrategy(s)
             # 逐一启动策略
-            print 'start strategy {0}'.format(s)
+            print('start strategy {0}'.format(s))
             self.mainEngine.okcoinEngine.startStrategy(s)
 
         # 指定的连接配置
-        print u'connect gateway:{0}'.format(self.gateway_name)
+        print('connect gateway:{0}'.format(self.gateway_name))
         self.mainEngine.connect(self.gateway_name)
         self.connected = True
 

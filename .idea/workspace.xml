@@ -13,45 +13,12 @@
     <SUITE FILE_PATH="coverage/vnpy_btc$test.coverage" NAME="test Coverage Results" MODIFIED="1501745922708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/api/okcoin" />
     <SUITE FILE_PATH="coverage/vnpy_btc$noUiMain.coverage" NAME="noUiMain Coverage Results" MODIFIED="1501744717424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/trader" />
     <SUITE FILE_PATH="coverage/vnpy_btc$OK_git.coverage" NAME="OK_git Coverage Results" MODIFIED="1501576423831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/api/okcoin" />
-    <SUITE FILE_PATH="coverage/vnpy_btc$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1501749095180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway" />
+    <SUITE FILE_PATH="coverage/vnpy_btc$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1501749793342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway" />
     <SUITE FILE_PATH="coverage/vnpy_btc$vtMain_cmd.coverage" NAME="vtMain_cmd Coverage Results" MODIFIED="1501501068826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/trader" />
     <SUITE FILE_PATH="coverage/vnpy_btc$okcoinGateway.coverage" NAME="okcoinGateway Coverage Results" MODIFIED="1501748632955" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway" />
     <SUITE FILE_PATH="coverage/vnpy_btc$run.coverage" NAME="run Coverage Results" MODIFIED="1501744510449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/VnTrader" />
     <SUITE FILE_PATH="coverage/vnpy_btc$ctpGateway.coverage" NAME="ctpGateway Coverage Results" MODIFIED="1501501147246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/trader/gateway/ctpGateway" />
     <SUITE FILE_PATH="coverage/vnpy_btc$vtMain_cmdcta.coverage" NAME="vtMain_cmdcta Coverage Results" MODIFIED="1501499436822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vnpy/trader" />
-  </component>
-  <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="okcoinGateway.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/okcoinGateway.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="622">
-                    <caret line="398" column="0" lean-forward="false" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
-                    <folding>
-                      <element signature="e#89#98#0" expanded="true" />
-                      <element signature="e#24121#24270#0" expanded="false" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="vtGateway.py" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/vnpy/trader/vtGateway.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="46">
-                    <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -60,9 +27,14 @@
         <entry file="file://$PROJECT_DIR$/vnpy/trader/noUiMain.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="327">
-              <caret line="115" column="28" lean-forward="true" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
+              <caret line="115" column="28" lean-forward="false" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
               <folding>
                 <element signature="e#19#28#0" expanded="true" />
+                <marker date="1501811437559" expanded="true" signature="2414:3018" ph="..." />
+                <marker date="1501811437559" expanded="true" signature="3035:3506" ph="..." />
+                <marker date="1501811437559" expanded="true" signature="3041:3467" ph="..." />
+                <marker date="1501811437559" expanded="true" signature="3535:3639" ph="..." />
+                <marker date="1501811437559" expanded="true" signature="3540:3574" ph="..." />
               </folding>
             </state>
           </provider>
@@ -71,8 +43,8 @@
       <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state relative-caret-position="263">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -81,10 +53,10 @@
       <file leaf-file-name="ctpGateway.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vnpy/trader/gateway/ctpGateway/ctpGateway.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="81" column="53" lean-forward="false" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="53" />
+            <state relative-caret-position="425">
+              <caret line="81" column="53" lean-forward="false" selection-start-line="81" selection-start-column="53" selection-end-line="81" selection-end-column="53" />
               <folding>
-                <element signature="e#17115#53811#0" expanded="false" />
+                <marker date="1501811449989" expanded="true" signature="54105:54359" ph="..." />
               </folding>
             </state>
           </provider>
@@ -121,8 +93,8 @@
         <option value="$PROJECT_DIR$/vnpy/trader/app/btcStrategy/BTC_setting.json" />
         <option value="$PROJECT_DIR$/examples/VnTrader/run.py" />
         <option value="$PROJECT_DIR$/vnpy/trader/noUiMain.py" />
-        <option value="$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/test.py" />
         <option value="$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/okcoinGateway.py" />
+        <option value="$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/test.py" />
       </list>
     </option>
   </component>
@@ -591,6 +563,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -602,7 +575,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48687088" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48687088" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -665,11 +638,16 @@
           <line>389</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/okcoinGateway.py</url>
+          <line>260</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="22" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -759,9 +737,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18055">
           <caret line="785" column="0" lean-forward="false" selection-start-line="785" selection-start-column="0" selection-end-line="785" selection-end-column="0" />
-          <folding>
-            <element signature="e#518#529#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,7 +993,6 @@
           <caret line="373" column="0" lean-forward="false" selection-start-line="373" selection-start-column="0" selection-end-line="373" selection-end-column="0" />
           <folding>
             <element signature="e#19#490#1" expanded="false" />
-            <element signature="e#518#529#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1041,19 +1016,24 @@
     <entry file="file://$PROJECT_DIR$/vnpy/trader/noUiMain.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
-          <caret line="115" column="28" lean-forward="true" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
+          <caret line="115" column="28" lean-forward="false" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
           <folding>
             <element signature="e#19#28#0" expanded="true" />
+            <marker date="1501811437559" expanded="true" signature="2414:3018" ph="..." />
+            <marker date="1501811437559" expanded="true" signature="3035:3506" ph="..." />
+            <marker date="1501811437559" expanded="true" signature="3041:3467" ph="..." />
+            <marker date="1501811437559" expanded="true" signature="3535:3639" ph="..." />
+            <marker date="1501811437559" expanded="true" signature="3540:3574" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vnpy/trader/gateway/ctpGateway/ctpGateway.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="81" column="53" lean-forward="false" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="53" />
+        <state relative-caret-position="425">
+          <caret line="81" column="53" lean-forward="false" selection-start-line="81" selection-start-column="53" selection-end-line="81" selection-end-column="53" />
           <folding>
-            <element signature="e#17115#53811#0" expanded="false" />
+            <marker date="1501811449989" expanded="true" signature="54105:54359" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1062,15 +1042,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda2/Lib/site-packages/websocket/_app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="209" column="0" lean-forward="false" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1501811439508" expanded="true" signature="282:4765" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="2797:3089" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="3201:3405" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="3528:3778" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="3801:3831" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="3952:3984" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="4101:4131" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="4256:4286" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="4394:4428" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="4537:4569" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="4597:4636" ph="..." />
+            <marker date="1501811439508" expanded="true" signature="4735:4765" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1078,36 +1063,42 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#19#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vnpy/api/okcoin/vnokcoin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7548">
-          <caret line="404" column="8" lean-forward="true" selection-start-line="404" selection-start-column="8" selection-end-line="404" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/okcoinGateway.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="398" column="0" lean-forward="false" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
+        <state relative-caret-position="208">
+          <caret line="260" column="23" lean-forward="false" selection-start-line="260" selection-start-column="23" selection-end-line="260" selection-end-column="23" />
           <folding>
             <element signature="e#89#98#0" expanded="true" />
-            <element signature="e#24121#24270#0" expanded="false" />
+            <marker date="1501811451112" expanded="true" signature="24539:24804" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda2/Lib/site-packages/websocket/_app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-816">
+          <caret line="228" column="81" lean-forward="true" selection-start-line="228" selection-start-column="81" selection-end-line="228" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vnpy/api/okcoin/vnokcoin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1094">
+          <caret line="287" column="75" lean-forward="true" selection-start-line="287" selection-start-column="75" selection-end-line="287" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vnpy/trader/gateway/okcoinGateway/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

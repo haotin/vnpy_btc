@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 
-from okcoinGateway import *
+from .okcoinGateway import *
 
 
 def test():
@@ -11,7 +11,7 @@ def test():
 
     def print_log(event):
         log = event.dict_['data']
-        print ':'.join([log.logTime, log.logContent])
+        print(':'.join([log.logTime, log.logContent]))
 
     app = QtCore.QCoreApplication(sys.argv)
 
@@ -28,6 +28,3 @@ def test():
 if __name__ == '__main__':
     test()
 
-
-if __name__ == '__main__':
-    test()

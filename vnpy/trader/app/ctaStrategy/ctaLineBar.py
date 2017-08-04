@@ -91,7 +91,7 @@ class CtaLineBar(object):
         self.paramList.append('name')
 
         # 输入参数
-        self.name = u'LineBar'
+        self.name = 'LineBar'
         self.mode = self.TICK_MODE          # 缺省为tick模式
         self.period = PERIOD_SECOND    # 缺省为分钟级别周期
         self.barTimeInterval = 300
@@ -260,7 +260,7 @@ class CtaLineBar(object):
                                       observation_covariance=1,
                                       transition_covariance=0.01)
                 except :
-                    self.writeCtaLog(u'导入卡尔曼过滤器失败,需先安装 pip install pykalman')
+                    self.writeCtaLog('导入卡尔曼过滤器失败,需先安装 pip install pykalman')
                     self.inputKF = False
 
 
@@ -286,7 +286,7 @@ class CtaLineBar(object):
         #    return
 
         if tick.datetime.hour == 8 or tick.datetime.hour == 20:
-            self.writeCtaLog(u'竞价排名tick时间:{0}'.format(tick.datetime))
+            self.writeCtaLog('竞价排名tick时间:{0}'.format(tick.datetime))
             return
         if self.lastTick is None:
             self.lastTick = tick
@@ -382,7 +382,7 @@ class CtaLineBar(object):
 
     def displayLastBar(self):
         """显示最后一个Bar的信息"""
-        msg = u'['+self.name+u']'
+        msg = '['+self.name+']'
 
         if len(self.lineBar) < 2:
             return msg
@@ -392,69 +392,69 @@ class CtaLineBar(object):
         else:
             displayBar = self.lineBar[-1]
 
-        msg = msg + u'{0} o:{1};h{2};l:{3};c:{4},v:{5}'.\
+        msg = msg + '{0} o:{1};h{2};l:{3};c:{4},v:{5}'.\
             format(displayBar.date+' '+displayBar.time, displayBar.open, displayBar.high,
                    displayBar.low, displayBar.close, displayBar.volume)
 
         if self.inputMa1Len > 0 and len(self.lineMa1) > 0:
-            msg = msg + u',MA({0}):{1}'.format(self.inputMa1Len, self.lineMa1[-1])
+            msg = msg + ',MA({0}):{1}'.format(self.inputMa1Len, self.lineMa1[-1])
 
         if self.inputMa2Len > 0 and len(self.lineMa2) > 0:
-            msg = msg + u',MA({0}):{1}'.format(self.inputMa2Len, self.lineMa2[-1])
+            msg = msg + ',MA({0}):{1}'.format(self.inputMa2Len, self.lineMa2[-1])
 
         if self.inputMa3Len > 0 and len(self.lineMa3) > 0:
-            msg = msg + u',MA({0}):{1}'.format(self.inputMa3Len, self.lineMa3[-1])
+            msg = msg + ',MA({0}):{1}'.format(self.inputMa3Len, self.lineMa3[-1])
 
         if self.inputEma1Len > 0 and len(self.lineEma1) > 0:
-            msg = msg + u',EMA({0}):{1}'.format(self.inputEma1Len, self.lineEma1[-1])
+            msg = msg + ',EMA({0}):{1}'.format(self.inputEma1Len, self.lineEma1[-1])
 
         if self.inputEma2Len > 0 and len(self.lineEma2) > 0:
-            msg = msg + u',EMA({0}):{1}'.format(self.inputEma2Len, self.lineEma2[-1])
+            msg = msg + ',EMA({0}):{1}'.format(self.inputEma2Len, self.lineEma2[-1])
 
         if self.inputDmiLen > 0 and len(self.linePdi) > 0:
-            msg = msg + u',Pdi:{1};Mdi:{1};Adx:{2}'.format(self.linePdi[-1], self.lineMdi[-1], self.lineAdx[-1])
+            msg = msg + ',Pdi:{1};Mdi:{1};Adx:{2}'.format(self.linePdi[-1], self.lineMdi[-1], self.lineAdx[-1])
 
         if self.inputAtr1Len > 0 and len(self.lineAtr1) > 0:
-            msg = msg + u',Atr({0}):{1}'.format(self.inputAtr1Len, self.lineAtr1[-1])
+            msg = msg + ',Atr({0}):{1}'.format(self.inputAtr1Len, self.lineAtr1[-1])
 
         if self.inputAtr2Len > 0 and len(self.lineAtr2) > 0:
-            msg = msg + u',Atr({0}):{1}'.format(self.inputAtr2Len, self.lineAtr2[-1])
+            msg = msg + ',Atr({0}):{1}'.format(self.inputAtr2Len, self.lineAtr2[-1])
 
         if self.inputAtr3Len > 0 and len(self.lineAtr3) > 0:
-            msg = msg + u',Atr({0}):{1}'.format(self.inputAtr3Len, self.lineAtr3[-1])
+            msg = msg + ',Atr({0}):{1}'.format(self.inputAtr3Len, self.lineAtr3[-1])
 
         if self.inputVolLen > 0 and len(self.lineAvgVol) > 0:
-            msg = msg + u',AvgVol({0}):{1}'.format(self.inputVolLen, self.lineAvgVol[-1])
+            msg = msg + ',AvgVol({0}):{1}'.format(self.inputVolLen, self.lineAvgVol[-1])
 
         if self.inputRsi1Len > 0 and len(self.lineRsi1) > 0:
-            msg = msg + u',Rsi({0}):{1}'.format(self.inputRsi1Len, self.lineRsi1[-1])
+            msg = msg + ',Rsi({0}):{1}'.format(self.inputRsi1Len, self.lineRsi1[-1])
 
         if self.inputRsi2Len > 0 and len(self.lineRsi2) > 0:
-            msg = msg + u',Rsi({0}):{1}'.format(self.inputRsi2Len, self.lineRsi2[-1])
+            msg = msg + ',Rsi({0}):{1}'.format(self.inputRsi2Len, self.lineRsi2[-1])
 
         if self.inputKdjLen > 0 and len(self.lineK) > 0:
-            msg = msg + u',KDJ({0}):{1},{2},{3}'.format(self.inputKdjLen,
+            msg = msg + ',KDJ({0}):{1},{2},{3}'.format(self.inputKdjLen,
                                                         round(self.lineK[-1], self.round_n),
                                                         round(self.lineD[-1], self.round_n),
                                                         round(self.lineJ[-1], self.round_n))
 
         if self.inputCciLen > 0 and len(self.lineCci) > 0:
-            msg = msg + u',Cci({0}):{1}'.format(self.inputCciLen, self.lineCci[-1])
+            msg = msg + ',Cci({0}):{1}'.format(self.inputCciLen, self.lineCci[-1])
 
         if self.inputBollLen > 0 and len(self.lineUpperBand)>0:
-            msg = msg + u',Boll({0}):u:{1},m:{2},l:{3}'.\
+            msg = msg + ',Boll({0}):u:{1},m:{2},l:{3}'.\
                 format(self.inputBollLen, round(self.lineUpperBand[-1], self.round_n),
                        round(self.lineMiddleBand[-1], self.round_n), round(self.lineLowerBand[-1]), self.round_n)
 
         if self.inputMacdFastPeriodLen >0 and len(self.lineDif)>0:
-            msg = msg + u',MACD({0},{1},{2}):Dif:{3},Dea{4},Macd:{5}'.\
+            msg = msg + ',MACD({0},{1},{2}):Dif:{3},Dea{4},Macd:{5}'.\
                 format(self.inputMacdFastPeriodLen, self.inputMacdSlowPeriodLen, self.inputMacdSignalPeriodLen,
                        round(self.lineDif[-1], self.round_n),
                        round(self.lineDea[-1], self.round_n),
                        round(self.lineMacd[-1], self.round_n))
 
         if self.inputKF and len(self.lineKfMa) > 0:
-            msg = msg + u',Kalman:{0}'.format( self.lineKfMa[-1])
+            msg = msg + ',Kalman:{0}'.format( self.lineKfMa[-1])
         return msg
 
     def __firstTick(self, tick):
@@ -613,7 +613,7 @@ class CtaLineBar(object):
 
         # 1、lineBar满足长度才执行计算
         if len(self.lineBar) < self.inputPreLen:
-            self.writeCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算High、Low需要：{1}'.
+            self.writeCtaLog('数据未充分,当前Bar数据数量：{0}，计算High、Low需要：{1}'.
                              format(len(self.lineBar), self.inputPreLen))
             return
 
@@ -654,7 +654,7 @@ class CtaLineBar(object):
 
         # 1、lineBar满足长度才执行计算
         if len(self.lineBar) < max(7, self.inputMa1Len, self.inputMa2Len, self.inputMa3Len)+2:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算MA需要：{1}'.
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算MA需要：{1}'.
                              format(len(self.lineBar), max(7, self.inputMa1Len, self.inputMa2Len, self.inputMa3Len)+2))
             return
 
@@ -729,7 +729,7 @@ class CtaLineBar(object):
 
         # 1、lineBar满足长度才执行计算
         if len(self.lineBar) < max(7, self.inputEma1Len, self.inputEma2Len)+2:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算EMA需要：{1}'.
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算EMA需要：{1}'.
                              format(len(self.lineBar), max(7, self.inputEma1Len, self.inputEma2Len)+2))
             return
 
@@ -786,7 +786,7 @@ class CtaLineBar(object):
 
         # 1、lineMx满足长度才执行计算
         if len(self.lineBar) < self.inputDmiLen+1:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算DMI需要：{1}'.format(len(self.lineBar), self.inputDmiLen+1))
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算DMI需要：{1}'.format(len(self.lineBar), self.inputDmiLen+1))
             return
 
         # 2、根据当前High，Low，(不包含当前周期）重新计算TR1，PDM，MDM和ATR
@@ -902,7 +902,7 @@ class CtaLineBar(object):
         if self.barPdi > self.barMdi and self.barAdxTrend and self.barAdxrTrend and self.barPdi >= self.inputDmiMax:
             self.buyFilterCond = True
 
-            self.writeCtaLog(u'{0}[DEBUG]Buy Signal On Bar,Pdi:{1}>Mdi:{2},adx[-1]:{3}>Adx[-2]:{4}'
+            self.writeCtaLog('{0}[DEBUG]Buy Signal On Bar,Pdi:{1}>Mdi:{2},adx[-1]:{3}>Adx[-2]:{4}'
                                  .format(self.curTick.datetime, self.barPdi, self.barMdi, self.lineAdx[-1], self.lineAdx[-2]))
         else:
             self.buyFilterCond = False
@@ -911,7 +911,7 @@ class CtaLineBar(object):
         if self.barPdi < self.barMdi and self.barAdxTrend and self.barAdxrTrend and self.barMdi >= self.inputDmiMax:
             self.sellFilterCond = True
 
-            self.writeCtaLog(u'{0}[DEBUG]Short Signal On Bar,Pdi:{1}<Mdi:{2},adx[-1]:{3}>Adx[-2]:{4}'
+            self.writeCtaLog('{0}[DEBUG]Short Signal On Bar,Pdi:{1}<Mdi:{2},adx[-1]:{3}>Adx[-2]:{4}'
                                  .format(self.curTick.datetime, self.barPdi, self.barMdi, self.lineAdx[-1], self.lineAdx[-2]))
         else:
             self.sellFilterCond = False
@@ -926,7 +926,7 @@ class CtaLineBar(object):
             return
 
         if len(self.lineBar) < maxAtrLen+1:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算ATR需要：{1}'.
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算ATR需要：{1}'.
                              format(len(self.lineBar), maxAtrLen+1))
             return
 
@@ -1023,7 +1023,7 @@ class CtaLineBar(object):
             return
 
         if len(self.lineBar) < self.inputVolLen+1:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算Avg Vol需要：{1}'.
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算Avg Vol需要：{1}'.
                              format(len(self.lineBar), self.inputVolLen+1))
             return
 
@@ -1047,7 +1047,7 @@ class CtaLineBar(object):
 
         # 1、lineBar满足长度才执行计算
         if len(self.lineBar) < self.inputRsi1Len+2:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算RSI需要：{1}'.
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算RSI需要：{1}'.
                              format(len(self.lineBar), self.inputRsi1Len + 2))
             return
 
@@ -1075,7 +1075,7 @@ class CtaLineBar(object):
             if self.lineRsi1[-1] < self.lineRsi1[-2] and self.lineRsi1[-3] < self.lineRsi1[-2]:
 
                 t={}
-                t["Type"] = u'T'
+                t["Type"] = 'T'
                 t["RSI"] = self.lineRsi1[-2]
                 t["Close"] = self.lineBar[-1-idx].close
 
@@ -1090,7 +1090,7 @@ class CtaLineBar(object):
             elif self.lineRsi1[-1] > self.lineRsi1[-2] and self.lineRsi1[-3] > self.lineRsi1[-2]:
 
                 b={}
-                b["Type"] = u'B'
+                b["Type"] = 'B'
                 b["RSI"] = self.lineRsi1[-2]
                 b["Close"] = self.lineBar[-1-idx].close
 
@@ -1135,7 +1135,7 @@ class CtaLineBar(object):
 
          # 1、lineBar满足长度才执行计算
         if len(self.lineBar) < self.inputCmiLen:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算CMI需要：{1}'.
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算CMI需要：{1}'.
                              format(len(self.lineBar), self.inputCmiLen))
             return
 
@@ -1168,7 +1168,7 @@ class CtaLineBar(object):
         l = len(self.lineBar)
 
         if l < min(14, self.inputBollLen)+1:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算Boll需要：{1}'.
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算Boll需要：{1}'.
                              format(len(self.lineBar), min(14, self.inputBollLen)+1))
             return
 
@@ -1235,7 +1235,7 @@ class CtaLineBar(object):
 
         if len(self.lineBar) < self.inputKdjLen+1:
             if not countInBar:
-                self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算KDJ需要：{1}'.format(len(self.lineBar), self.inputKdjLen+1))
+                self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算KDJ需要：{1}'.format(len(self.lineBar), self.inputKdjLen+1))
             return
 
         # 数据是Tick模式，非bar内计算
@@ -1303,7 +1303,7 @@ class CtaLineBar(object):
             if self.lineJ[-1] < self.lineJ[-2] and self.lineJ[-3] <= self.lineJ[-2]:
 
                 t={}
-                t["Type"] = u'T'
+                t["Type"] = 'T'
                 t["J"] = self.lineJ[-2]
                 t["Close"] = self.lineBar[-1-idx].close
 
@@ -1317,7 +1317,7 @@ class CtaLineBar(object):
             elif self.lineJ[-1] > self.lineJ[-2] and self.lineJ[-3] >= self.lineJ[-2]:
 
                 b={}
-                b["Type"] = u'B'
+                b["Type"] = 'B'
                 b["J"] = self.lineJ[-2]
                 b["Close"] = self.lineBar[-1-idx].close
 
@@ -1348,7 +1348,7 @@ class CtaLineBar(object):
         #maxLen = maxLen * 3             # 注：数据长度需要足够，才能准确。测试过，3倍长度才可以与国内的文华等软件一致
 
         if len(self.lineBar) < maxLen:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算MACD需要：{1}'.format(len(self.lineBar), maxLen))
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算MACD需要：{1}'.format(len(self.lineBar), maxLen))
             return
 
         if self.mode == self.TICK_MODE:
@@ -1396,7 +1396,7 @@ class CtaLineBar(object):
 
         # 1、lineBar满足长度才执行计算
         if len(self.lineBar) < self.inputCciLen+2:
-            self.debugCtaLog(u'数据未充分,当前Bar数据数量：{0}，计算CCI需要：{1}'.
+            self.debugCtaLog('数据未充分,当前Bar数据数量：{0}，计算CCI需要：{1}'.
                              format(len(self.lineBar), self.inputCciLen + 2))
             return
 
@@ -1474,12 +1474,12 @@ class CtaLineBar(object):
     # ----------------------------------------------------------------------
     def writeCtaLog(self, content):
         """记录CTA日志"""
-        self.strategy.writeCtaLog(u'['+self.name+u']'+content)
+        self.strategy.writeCtaLog('['+self.name+']'+content)
 
     def debugCtaLog(self,content):
         """记录CTA日志"""
         if DEBUGCTALOG:
-            self.strategy.writeCtaLog(u'['+self.name+u'-DEBUG]'+content)
+            self.strategy.writeCtaLog('['+self.name+'-DEBUG]'+content)
 
 
 class CtaDayBar(object):
@@ -1502,7 +1502,7 @@ class CtaDayBar(object):
         self.paramList.append('name')
 
         # 输入参数
-        self.name = u'DayBar'
+        self.name = 'DayBar'
 
         self.mode = self.TICK_MODE
         self.inputPreLen = EMPTY_INT  # 1
@@ -1649,7 +1649,7 @@ class CtaDayBar(object):
 
     def displayLastBar(self):
         """显示最后一个Bar的信息"""
-        msg = u'[' + self.name + u']'
+        msg = '[' + self.name + ']'
 
         if len(self.lineBar) < 2:
             return msg
@@ -1659,7 +1659,7 @@ class CtaDayBar(object):
         else:
             displayBar = self.lineBar[-1]
 
-        msg = msg + u'{0} o:{1};h{2};l:{3};c:{4}'. \
+        msg = msg + '{0} o:{1};h{2};l:{3};c:{4}'. \
             format(displayBar.date + ' ' + displayBar.time, displayBar.open, displayBar.high,
                    displayBar.low, displayBar.close)
 
@@ -1680,7 +1680,7 @@ class CtaDayBar(object):
 
         # 1、lineBar满足长度才执行计算
         if len(self.lineBar) < self.inputPreLen:
-            self.writeCtaLog(u'数据未充分,当前{0}r数据数量：{1}，计算High、Low需要：{2}'.
+            self.writeCtaLog('数据未充分,当前{0}r数据数量：{1}，计算High、Low需要：{2}'.
                              format(self.name, len(self.lineBar), self.inputPreLen))
             return
 

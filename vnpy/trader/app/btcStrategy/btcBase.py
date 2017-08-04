@@ -4,25 +4,25 @@
 本文件中包含了CTA模块中用到的一些基础设置、类和常量等。
 '''
 
-from __future__ import division
-print 'load btcBase.py'
+
+print('load btcBase.py')
 
 # 常量定义
 # CTA引擎中涉及到的交易方向类型
-CTAORDER_BUY = u'买开'
-CTAORDER_SELL = u'卖平'
-CTAORDER_SHORT = u'卖开'
-CTAORDER_COVER = u'买平'
+CTAORDER_BUY = '买开'
+CTAORDER_SELL = '卖平'
+CTAORDER_SHORT = '卖开'
+CTAORDER_COVER = '买平'
 
-CTAORDER_OPEN_REJECT = u'开单拒绝'
-CTAORDER_OPEN_FAIL = u'开单失败'
-CTAORDER_CLOSE_FAIL = u'平单失败'
+CTAORDER_OPEN_REJECT = '开单拒绝'
+CTAORDER_OPEN_FAIL = '开单失败'
+CTAORDER_CLOSE_FAIL = '平单失败'
 
 
 # 本地停止单状态
-STOPORDER_WAITING = u'等待中'
-STOPORDER_CANCELLED = u'已撤销'
-STOPORDER_TRIGGERED = u'已触发'
+STOPORDER_WAITING = '等待中'
+STOPORDER_CANCELLED = '已撤销'
+STOPORDER_TRIGGERED = '已触发'
 
 # ATR 仓位管理
 ATRRATE_STOPLOSS = 3

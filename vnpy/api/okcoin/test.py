@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-from vnokcoin import *
+from .vnokcoin import *
 import time
 # 在OkCoin网站申请这两个Key，分别对应用户名和密码
 '''
@@ -52,4 +52,4 @@ api.subscribeSpotDepth(SYMBOL_BTC, DEPTH_20)
 #api.futureOrderInfo(symbol, expiry, orderid, status, page, length)
 # print d
 # print time.time()
-raw_input()
+input()

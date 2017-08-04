@@ -6,7 +6,7 @@
 
 from datetime import datetime
 
-from btcBase import *
+from .btcBase import *
 from vnpy.trader.vtConstant import *
 
 
@@ -66,7 +66,7 @@ class CtaTemplate(object):
 
         # 设置策略的参数
         if setting:
-            self.writeCtaLog(u'基类设置参数')
+            self.writeCtaLog('基类设置参数')
             d = self.__dict__
             for key in self.paramList:
                 if key in setting:
@@ -315,7 +315,7 @@ class TargetPosTemplate(CtaTemplate):
     """
 
     className = 'TargetPosTemplate'
-    author = u'量衍投资'
+    author = '量衍投资'
 
     # 目标持仓模板的基本变量
     tickAdd = 1             # 委托时相对基准价格的超价

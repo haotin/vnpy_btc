@@ -43,12 +43,12 @@ class CtaValueMonitor(QtGui.QTableWidget):
             # 设置标题
 
             self.setColumnCount(len(data))
-            self.setHorizontalHeaderLabels(data.keys())
+            self.setHorizontalHeaderLabels(list(data.keys()))
 
             # 新增数据
             col = 0
-            for k, v in data.items():
-                cell = QtGui.QTableWidgetItem(unicode(v))
+            for k, v in list(data.items()):
+                cell = QtGui.QTableWidgetItem(str(v))
                 self.keyCellDict[k] = cell
                 self.setItem(0, col, cell)
                 col += 1
@@ -56,9 +56,9 @@ class CtaValueMonitor(QtGui.QTableWidget):
             self.inited = True
         else:
             # 更新数据
-            for k, v in data.items():
+            for k, v in list(data.items()):
                 cell = self.keyCellDict[k]
-                cell.setText(unicode(v))
+                cell.setText(str(v))
 
         #cell.setBackgroundColor()
 
@@ -99,7 +99,7 @@ class CtaStrategyManager(QtGui.QGroupBox):
         buttonInit = QtGui.QPushButton(text.INIT)
         buttonStart = QtGui.QPushButton(text.START)
         buttonStop = QtGui.QPushButton(text.STOP)
-        buttonInitForce = QtGui.QPushButton(u'强制初始化')
+        buttonInitForce = QtGui.QPushButton('强制初始化')
         buttonInit.clicked.connect(self.init)
         buttonStart.clicked.connect(self.start)
         buttonStop.clicked.connect(self.stop)
@@ -196,7 +196,7 @@ class CtaEngineManager(QtGui.QWidget):
         """初始化界面"""
         path = os.getcwd().rsplit('\\')[-1]
 
-        self.setWindowTitle(u'{0} CTA策略'.format(path))
+        self.setWindowTitle('{0} CTA策略'.format(path))
         
         # 按钮
         loadButton = QtGui.QPushButton(text.LOAD_STRATEGY)
@@ -241,7 +241,7 @@ class CtaEngineManager(QtGui.QWidget):
         w = QtGui.QWidget()
         vbox = QtGui.QVBoxLayout()
         
-        for name in self.ctaEngine.strategyDict.keys():
+        for name in list(self.ctaEngine.strategyDict.keys()):
             # 为每一个策略实例，创建对应的管理组件实例
             strategyManager = CtaStrategyManager(self.ctaEngine, self.eventEngine, name)
             vbox.addWidget(strategyManager)
@@ -255,19 +255,19 @@ class CtaEngineManager(QtGui.QWidget):
     #----------------------------------------------------------------------
     def initAll(self):
         """全部初始化"""
-        for name in self.ctaEngine.strategyDict.keys():
+        for name in list(self.ctaEngine.strategyDict.keys()):
             self.ctaEngine.initStrategy(name)    
             
     #----------------------------------------------------------------------
     def startAll(self):
         """全部启动"""
-        for name in self.ctaEngine.strategyDict.keys():
+        for name in list(self.ctaEngine.strategyDict.keys()):
             self.ctaEngine.startStrategy(name)
             
     #----------------------------------------------------------------------
     def stopAll(self):
         """全部停止"""
-        for name in self.ctaEngine.strategyDict.keys():
+        for name in list(self.ctaEngine.strategyDict.keys()):
             self.ctaEngine.stopStrategy(name)
             
     #----------------------------------------------------------------------

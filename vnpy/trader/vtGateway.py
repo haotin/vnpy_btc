@@ -92,7 +92,7 @@ class VtGateway(object):
         event1.dict_['data'] = error
         self.eventEngine.put(event1)
 
-        logMsg = u'{0}:[{1}]:{2}'.format(error.gatewayName, error.errorID,error.errorMsg )
+        logMsg = '{0}:[{1}]:{2}'.format(error.gatewayName, error.errorID,error.errorMsg )
         # 写入本地log日志
         logging.info(logMsg)
         

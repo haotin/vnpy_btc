@@ -193,7 +193,7 @@ def setup_logger(filename=None, debug=False):
         else:
             handlers.append('std_info')
 
-    for k, v in LOGGING['loggers'].items():
+    for k, v in list(LOGGING['loggers'].items()):
         v['handlers'] = handlers
 
     logging.config.dictConfig(LOGGING)

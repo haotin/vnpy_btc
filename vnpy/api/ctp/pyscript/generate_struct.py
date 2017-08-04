@@ -2,7 +2,7 @@
 
 __author__ = 'CHENXY'
 
-from ctp_data_type import *
+from .ctp_data_type import *
 
 def main():
     """主函数"""

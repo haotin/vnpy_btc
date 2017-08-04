@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-print 'load vtEngine.py'
+print('load vtEngine.py')
 
 import shelve
 from collections import OrderedDict
@@ -106,18 +106,18 @@ class MainEngine(object):
         """查询Status"""
 
         # gateway Status
-        gw_status = u''
-        for k,g in self.gatewayDict.items():
-            gw_status += u'[{0}/{1}]'.format(k,g.checkStatus())
+        gw_status = ''
+        for k,g in list(self.gatewayDict.items()):
+            gw_status += '[{0}/{1}]'.format(k,g.checkStatus())
 
-        self.writeLog(u'gw:{0}'.format(gw_status))
+        self.writeLog('gw:{0}'.format(gw_status))
         # ctaEngine Status
-        cta_status = u''
+        cta_status = ''
         if self.ctaEngine:
             s1,s2 = self.ctaEngine.qryStatus()
-            cta_status = u'{0},{1}'.format(s1,s2)
+            cta_status = '{0},{1}'.format(s1,s2)
 
-        self.writeLog(u'cta:{0}'.format(cta_status))
+        self.writeLog('cta:{0}'.format(cta_status))
 
     # ----------------------------------------------------------------------
     def subscribe(self, subscribeReq, gatewayName):
@@ -127,7 +127,7 @@ class MainEngine(object):
             gateway.subscribe(subscribeReq)
         else:
             if len(self.gatewayDict) > 0:
-                for gateway in self.gatewayDict.values():
+                for gateway in list(self.gatewayDict.values()):
                     gateway.subscribe(subscribeReq)
             else:
                 self.writeLog(text.GATEWAY_NOT_EXIST.format(gateway=gatewayName))
@@ -137,7 +137,7 @@ class MainEngine(object):
         """对特定接口发单"""
         # 如果风控检查失败则不发单
         if not self.rmEngine.checkRisk(orderReq):
-            self.writeLog(u'风控检查不通过')
+            self.writeLog('风控检查不通过')
             return ''    
         
         if gatewayName in self.gatewayDict:
@@ -185,7 +185,7 @@ class MainEngine(object):
     def exit(self):
         """退出程序前调用，保证正常退出"""        
         # 安全关闭所有接口
-        for gateway in self.gatewayDict.values():        
+        for gateway in list(self.gatewayDict.values()):        
             gateway.close()
         
         # 停止事件引擎
@@ -207,10 +207,10 @@ class MainEngine(object):
                 gateway.close()
                 return
             else:
-                self.writeLog(u'gateway接口不存在：%s' % gateway_name)
+                self.writeLog('gateway接口不存在：%s' % gateway_name)
 
         # 断开所有的gateway
-        for gateway in self.gatewayDict.values():
+        for gateway in list(self.gatewayDict.values()):
             gateway.close()
 
     # ----------------------------------------------------------------------
@@ -250,7 +250,7 @@ class MainEngine(object):
 
         # 发出邮件
         try:
-            sendmail(subject=u'Warning', msgcontent=content)
+            sendmail(subject='Warning', msgcontent=content)
         except:
             pass
 
@@ -265,7 +265,7 @@ class MainEngine(object):
 
         # 发出邮件
         try:
-            sendmail(subject=u'Notification', msgcontent=content)
+            sendmail(subject='Notification', msgcontent=content)
         except:
             pass
 
@@ -284,7 +284,7 @@ class MainEngine(object):
 
         # 发出邮件
         try:
-            sendmail(subject=u'Critical', msgcontent=content)
+            sendmail(subject='Critical', msgcontent=content)
         except:
             pass
 
@@ -380,7 +380,7 @@ class MainEngine(object):
     # ----------------------------------------------------------------------
     def getAllGatewayNames(self):
         """查询引擎中所有可用接口的名称"""
-        return self.gatewayDict.keys()
+        return list(self.gatewayDict.keys())
 
     def clearData(self):
         """清空数据引擎的数据"""
@@ -437,7 +437,7 @@ class DataEngine(object):
     # ----------------------------------------------------------------------
     def getAllContracts(self):
         """查询所有合约对象（返回列表）"""
-        return self.contractDict.values()
+        return list(self.contractDict.values())
     
     # ----------------------------------------------------------------------
     def saveContracts(self):
@@ -452,7 +452,7 @@ class DataEngine(object):
         f = shelve.open(self.contractFileName)
         if 'data' in f:
             d = f['data']
-            for key, value in d.items():
+            for key, value in list(d.items()):
                 self.contractDict[key] = value
         f.close()
         
@@ -481,7 +481,7 @@ class DataEngine(object):
     # ----------------------------------------------------------------------
     def getAllWorkingOrders(self):
         """查询所有活动委托（返回列表）"""
-        return self.workingOrderDict.values()
+        return list(self.workingOrderDict.values())
     
     # ----------------------------------------------------------------------
     def registerEvent(self):
@@ -521,7 +521,7 @@ class DataEngine(object):
         contract = self.mainEngine.getContract(symbol)
 
         if not contract:
-            self.mainEngine.writeLog(u'找不到合约{0}信息'.format(symbol))
+            self.mainEngine.writeLog('找不到合约{0}信息'.format(symbol))
             return
 
         # 订阅合约
@@ -533,5 +533,5 @@ class DataEngine(object):
 
         self.mainEngine.subscribe(req, gatewayName)
 
-        self.mainEngine.writeLog(u'自动订阅合约{0}'.format(symbol))
+        self.mainEngine.writeLog('自动订阅合约{0}'.format(symbol))
 

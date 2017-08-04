@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 import json
 
-from ctaBase import *
+from .ctaBase import *
 from vnpy.trader.vtConstant import *
 
 DEBUGCTALOG = True
@@ -77,7 +77,7 @@ class CtaGrid(object):
     def toStr(self):
         """输入字符串"""
 
-        str = u'o:{0}/{1};c:{2}/{3},r:{4}/opentime:{5}/ordertime:{6}'\
+        str = 'o:{0}/{1};c:{2}/{3},r:{4}/opentime:{5}/ordertime:{6}'\
             .format(self.openPrice, self.openStatus, self.closePrice,
                     self.closeStatus, self.orderRef, self.openDatetime, self.orderDatetime)
         return str
@@ -135,14 +135,14 @@ class CtaGridTrade(object):
         upline，上支撑线
         dnline，下阻力线
         """
-        self.writeCtaLog(u'初始化网格队列，upline:{0},dnline:{1}'.format(upline, dnline))
+        self.writeCtaLog('初始化网格队列，upline:{0},dnline:{1}'.format(upline, dnline))
         # 初始化上网格列表
         if len(self.upGrids) == 0:
 
             self.upGrids = self.load(direction= DIRECTION_SHORT)
 
             if len(self.upGrids) >0:
-                self.writeCtaLog(u'上网格从文件加载完成')
+                self.writeCtaLog('上网格从文件加载完成')
             else:
                 # 做空，开仓价为上阻力线+网格高度*i，平仓价为开仓价-止盈高度，开仓数量为缺省
                 for i in range(0, self.maxLots, 1):
@@ -152,7 +152,7 @@ class CtaGridTrade(object):
                                    volume=self.volume*self.getVolumeRate(i))
                     self.upGrids.append(grid)
 
-                self.writeCtaLog(u'上网格{0}~{1}初始化完成'.format(upline,upline+self.gridHeight*self.maxLots))
+                self.writeCtaLog('上网格{0}~{1}初始化完成'.format(upline,upline+self.gridHeight*self.maxLots))
                 self.save(direction=DIRECTION_SHORT)
 
 
@@ -162,7 +162,7 @@ class CtaGridTrade(object):
             self.dnGrids = self.load(direction= DIRECTION_LONG)
 
             if len(self.dnGrids) >0:
-                self.writeCtaLog(u'下网格从文件加载完成')
+                self.writeCtaLog('下网格从文件加载完成')
             else:
                 for i in range(0, self.maxLots, 1):
 
@@ -173,7 +173,7 @@ class CtaGridTrade(object):
                                    volume=self.volume*self.getVolumeRate(i))
                     self.dnGrids.append(grid)
 
-                self.writeCtaLog(u'下网格{0}~{1}初始化完成'.format(dnline,dnline-self.gridHeight*self.maxLots))
+                self.writeCtaLog('下网格{0}~{1}初始化完成'.format(dnline,dnline-self.gridHeight*self.maxLots))
                 self.save(direction=DIRECTION_LONG)
 
     def writeCtaLog(self, log):
@@ -182,9 +182,9 @@ class CtaGridTrade(object):
     def toStr(self,direction):
         """显示网格"""
 
-        pendingCloseList = u''      # 平仓清单
-        pendingOpenList = u''       # 开仓清单
-        deactiveList = u''          # 待激活清单
+        pendingCloseList = ''      # 平仓清单
+        pendingOpenList = ''       # 开仓清单
+        deactiveList = ''          # 待激活清单
 
         if direction == DIRECTION_LONG:
             for grid in self.dnGrids:
@@ -192,51 +192,51 @@ class CtaGridTrade(object):
                 if grid.openStatus :
 
                     if grid.tradedVolume == EMPTY_INT:
-                        pendingCloseList = pendingCloseList + u'[{0}->{1},v:{2}];'\
+                        pendingCloseList = pendingCloseList + '[{0}->{1},v:{2}];'\
                             .format(grid.openPrice, grid.closePrice, grid.volume)
                     else:
-                        pendingCloseList = pendingCloseList + u'[{0}->{1},v:{2}/{3}];'\
+                        pendingCloseList = pendingCloseList + '[{0}->{1},v:{2}/{3}];'\
                             .format(grid.openPrice, grid.closePrice, grid.volume, grid.tradedVolume)
 
                 # 待开仓成交
                 elif not grid.openStatus and grid.orderStatus:
                     if grid.tradedVolume == EMPTY_INT:
-                        pendingOpenList = pendingOpenList + u'[{0},v:{1}];'.format(grid.openPrice, grid.volume)
+                        pendingOpenList = pendingOpenList + '[{0},v:{1}];'.format(grid.openPrice, grid.volume)
                     else:
-                        pendingOpenList = pendingOpenList + u'[{0},v:{1}/{2}];'\
+                        pendingOpenList = pendingOpenList + '[{0},v:{1}/{2}];'\
                             .format(grid.openPrice, grid.volume, grid.tradedVolume)
 
                 # 等待挂单
                 else:
-                    deactiveList = deactiveList + u'[{0}];'.format(grid.openPrice)
+                    deactiveList = deactiveList + '[{0}];'.format(grid.openPrice)
 
 
-            return u'多:待平:{0};开:{1};待:{2}'.format(pendingCloseList,pendingOpenList,deactiveList)
+            return '多:待平:{0};开:{1};待:{2}'.format(pendingCloseList,pendingOpenList,deactiveList)
 
         if direction == DIRECTION_SHORT:
             for grid in self.upGrids:
                 # 待平仓
                 if grid.openStatus:
                     if grid.tradedVolume == EMPTY_INT:
-                        pendingCloseList = pendingCloseList + u'[{0}->{1},v:{2}];'\
+                        pendingCloseList = pendingCloseList + '[{0}->{1},v:{2}];'\
                             .format(grid.openPrice, grid.closePrice, grid.volume)
                     else:
-                        pendingCloseList = pendingCloseList + u'[{0}->{1},v:{2}/{3}];'\
+                        pendingCloseList = pendingCloseList + '[{0}->{1},v:{2}/{3}];'\
                             .format(grid.openPrice, grid.closePrice, grid.volume, grid.tradedVolume)
 
                 # 待开仓成交
                 elif not grid.openStatus and grid.orderStatus:
                     if grid.tradedVolume == EMPTY_INT:
-                        pendingOpenList = pendingOpenList + u'[{0},v:{1}];'.format(grid.openPrice, grid.volume)
+                        pendingOpenList = pendingOpenList + '[{0},v:{1}];'.format(grid.openPrice, grid.volume)
                     else:
-                        pendingOpenList = pendingOpenList + u'[{0},v:{1}/{2}];'\
+                        pendingOpenList = pendingOpenList + '[{0},v:{1}/{2}];'\
                             .format(grid.openPrice, grid.volume, grid.tradedVolume)
 
                 # 等待挂单
                 else:
-                    deactiveList = deactiveList + u'[{0}];'.format(grid.openPrice)
+                    deactiveList = deactiveList + '[{0}];'.format(grid.openPrice)
 
-            return u'空:待平:{0};开:{1};待:{2}'.format(pendingCloseList,pendingOpenList,deactiveList)
+            return '空:待平:{0};开:{1};待:{2}'.format(pendingCloseList,pendingOpenList,deactiveList)
 
     def getGrids(self, direction, ordered=False, opened=False, closed=False, begin=EMPTY_FLOAT, end=EMPTY_FLOAT):
         """获取未挂单的网格
@@ -295,14 +295,14 @@ class CtaGridTrade(object):
                 if x.openPrice == openPrice and x.orderRef != EMPTY_STRING and x.orderStatus==True and x.openStatus==False:
                     x.orderRef = EMPTY_STRING
                     x.orderStatus = False
-                    self.writeCtaLog(u'下网格撤单[{0}]'.format(x.openPrice))
+                    self.writeCtaLog('下网格撤单[{0}]'.format(x.openPrice))
 
         if direction == DIRECTION_SHORT:
             for x in self.upGrids:
                 if x.openPrice == openPrice and x.orderRef != EMPTY_STRING and x.orderStatus==True and x.openStatus==False:
                     x.orderRef = EMPTY_STRING
                     x.orderStatus = False
-                    self.writeCtaLog(u'上网格撤单[{0}]'.format(x.openPrice))
+                    self.writeCtaLog('上网格撤单[{0}]'.format(x.openPrice))
 
     def getGrid(self, direction, openPrice=EMPTY_FLOAT, closePrice=EMPTY_FLOAT, orderRef=EMPTY_STRING, t=EMPTY_STRING):
         """获取网格"""
@@ -310,24 +310,24 @@ class CtaGridTrade(object):
         if direction == DIRECTION_LONG:
             for x in self.dnGrids:
                 # 优先匹配价格
-                if t == u'OpenPrice' and x.openPrice == openPrice:
+                if t == 'OpenPrice' and x.openPrice == openPrice:
                     return x
-                elif t == u'ClosePrice' and x.closePrice == closePrice:
+                elif t == 'ClosePrice' and x.closePrice == closePrice:
                     return x
-                elif t == u'OrderRef' and x.orderRef == orderRef:
+                elif t == 'OrderRef' and x.orderRef == orderRef:
                     return x
 
         if direction == DIRECTION_SHORT:
             for x in self.upGrids:
                 # 优先匹配价格
-                if t == u'OpenPrice' and x.openPrice == openPrice:
+                if t == 'OpenPrice' and x.openPrice == openPrice:
                     return x
-                elif t == u'ClosePrice' and x.closePrice == closePrice:
+                elif t == 'ClosePrice' and x.closePrice == closePrice:
                     return x
-                elif t == u'OrderRef' and x.orderRef == orderRef:
+                elif t == 'OrderRef' and x.orderRef == orderRef:
                     return x
 
-        self.writeCtaLog(u'异常，找不到网格[{0},{1},{2},{3},{4}]'.format(direction, openPrice, closePrice, orderRef, t))
+        self.writeCtaLog('异常，找不到网格[{0},{1},{2},{3},{4}]'.format(direction, openPrice, closePrice, orderRef, t))
         return None
 
     def getLastOpenedGrid(self, direction):
@@ -355,32 +355,32 @@ class CtaGridTrade(object):
         if direction == DIRECTION_LONG:
             for x in self.dnGrids:
                 if x.closePrice == closePrice and x.openStatus and x.volume == closeVolume:
-                    self.writeCtaLog(u'下网格交易结束[{0}->{1}]，仓位:{2},移除网格'.format(x.openPrice, x.closePrice,closeVolume))
+                    self.writeCtaLog('下网格交易结束[{0}->{1}]，仓位:{2},移除网格'.format(x.openPrice, x.closePrice,closeVolume))
                     self.dnGrids.remove(x)
                     return
 
                 if x.closePrice == closePrice and x.openStatus and x.volume > closeVolume:
-                    self.writeCtaLog(u'下网格交易部分结束[{0}->{1}],减少仓位:{2}'.format(x.openPrice, x.closePrice,closeVolume))
+                    self.writeCtaLog('下网格交易部分结束[{0}->{1}],减少仓位:{2}'.format(x.openPrice, x.closePrice,closeVolume))
                     x.volume = x.volume - closeVolume
 
                 if x.closePrice == closePrice and x.openStatus and x.volume < closeVolume:
-                    self.writeCtaLog(u'下网格交易结束[{0}->{1}],移除网格，剩余仓位:{2}'.format(x.openPrice, x.closePrice, closeVolume-x.volume))
+                    self.writeCtaLog('下网格交易结束[{0}->{1}],移除网格，剩余仓位:{2}'.format(x.openPrice, x.closePrice, closeVolume-x.volume))
                     closeVolume = closeVolume - x.volume
                     self.dnGrids.remove(x)
 
         if direction == DIRECTION_SHORT:
             for x in self.upGrids:
                 if x.closePrice == closePrice and x.openStatus and x.volume == closeVolume:
-                    self.writeCtaLog(u'上网格交易结束[{0}->{1}]，仓位:{2},移除网格'.format(x.openPrice, x.closePrice,closeVolume))
+                    self.writeCtaLog('上网格交易结束[{0}->{1}]，仓位:{2},移除网格'.format(x.openPrice, x.closePrice,closeVolume))
                     self.upGrids.remove(x)
                     return
 
                 if x.closePrice == closePrice and x.openStatus and x.volume > closeVolume:
-                   self.writeCtaLog(u'上网格交易结束[{0}->{1}]，仓位减少:{2}'.format(x.openPrice, x.closePrice,closeVolume))
+                   self.writeCtaLog('上网格交易结束[{0}->{1}]，仓位减少:{2}'.format(x.openPrice, x.closePrice,closeVolume))
                    x.volume = x.volume - closeVolume
 
                 if x.closePrice == closePrice and x.openStatus and x.volume < closeVolume:
-                    self.writeCtaLog(u'上网格交易结束[{0}->{1}]，移除网格，剩余仓位:{2}'.format(x.openPrice, x.closePrice,closeVolume-x.volume))
+                    self.writeCtaLog('上网格交易结束[{0}->{1}]，移除网格，剩余仓位:{2}'.format(x.openPrice, x.closePrice,closeVolume-x.volume))
                     closeVolume = closeVolume - x.volume
                     self.upGrids.remove(x)
 
@@ -390,13 +390,13 @@ class CtaGridTrade(object):
         if direction == DIRECTION_LONG:
             for x in self.dnGrids[:]:
                 if x.openPrice > priceline and not x.orderStatus and not x.openStatus and not x.closeStatus:
-                    self.writeCtaLog(u'清除下网格[open={0}]'.format(x.openPrice))
+                    self.writeCtaLog('清除下网格[open={0}]'.format(x.openPrice))
                     self.dnGrids.remove(x)
 
         if direction == DIRECTION_SHORT:
             for x in self.upGrids[:]:
                 if x.openPrice < priceline and not x.orderStatus and not x.openStatus and not x.closeStatus:
-                    self.writeCtaLog(u'清除上网格[open={0}]'.format(x.openPrice))
+                    self.writeCtaLog('清除上网格[open={0}]'.format(x.openPrice))
                     self.upGrids.remove(x)
 
     def rebuildGrids(self, direction, upline=EMPTY_FLOAT, dnline=EMPTY_FLOAT, midline=EMPTY_FLOAT, upRate=1, dnRate = 1):
@@ -406,7 +406,7 @@ class CtaGridTrade(object):
         upRate , 上轨网格高度比率
         dnRate， 下轨网格高度比率
         """
-        self.writeCtaLog(u'重新拉网:upline:{0},dnline:{1}'.format(upline, dnline))
+        self.writeCtaLog('重新拉网:upline:{0},dnline:{1}'.format(upline, dnline))
 
         # 检查上下网格的高度比率，不能低于0.5
         if upRate < 0.5 or dnRate < 0.5:
@@ -422,18 +422,18 @@ class CtaGridTrade(object):
                     removePrices.append(x.openPrice)
                     self.dnGrids.remove(x)
                 else:
-                    self.writeCtaLog(u'保留网格[open={0}]'.format(x.openPrice))
+                    self.writeCtaLog('保留网格[open={0}]'.format(x.openPrice))
                     if x.openPrice < minPriceInOrder :
                         minPriceInOrder = x.openPrice
 
-            self.writeCtaLog(u'清除下网格[{0}]'.format(removePrices))
+            self.writeCtaLog('清除下网格[{0}]'.format(removePrices))
 
             # 需要重建的剩余网格数量
             remainLots = len(self.dnGrids)
             lots = self.maxLots - remainLots
 
             dnline = min(dnline, minPriceInOrder-self.gridHeight*dnRate)
-            self.writeCtaLog(u'需要重建的网格数量:{0},起点:{1}'.format(lots, dnline))
+            self.writeCtaLog('需要重建的网格数量:{0},起点:{1}'.format(lots, dnline))
 
             if lots > 0:
                 for i in range(0, lots, 1):
@@ -447,7 +447,7 @@ class CtaGridTrade(object):
                                    volume=self.volume*self.getVolumeRate(remainLots + i))
 
                     self.dnGrids.append(grid)
-                self.writeCtaLog(u'重新拉下网格:[{0}~{1}]'.format(dnline, dnline-self.gridHeight * lots))
+                self.writeCtaLog('重新拉下网格:[{0}~{1}]'.format(dnline, dnline-self.gridHeight * lots))
 
         if direction == DIRECTION_SHORT:
             maxPriceInOrder = midline
@@ -458,17 +458,17 @@ class CtaGridTrade(object):
                     removePrices.append(x.openPrice)
                     self.upGrids.remove(x)
                 else:
-                    self.writeCtaLog(u'保留网格[open={0}]'.format(x.openPrice))
+                    self.writeCtaLog('保留网格[open={0}]'.format(x.openPrice))
                     if x.openPrice > maxPriceInOrder :
                         maxPriceInOrder = x.openPrice
 
-            self.writeCtaLog(u'清除上网格[{0}]'.format(removePrices))
+            self.writeCtaLog('清除上网格[{0}]'.format(removePrices))
 
             # 需要重建的剩余网格数量
             remainLots = len(self.upGrids)
             lots = self.maxLots - remainLots
             upline = max(upline, maxPriceInOrder+self.gridHeight*upRate)
-            self.writeCtaLog(u'需要重建的网格数量:{0},起点:{1}'.format(lots, upline))
+            self.writeCtaLog('需要重建的网格数量:{0},起点:{1}'.format(lots, upline))
 
             if lots > 0:
                 # 做空，开仓价为上阻力线+网格高度*i，平仓价为开仓价-止盈高度，开仓数量为缺省
@@ -482,7 +482,7 @@ class CtaGridTrade(object):
                                    volume=self.volume*self.getVolumeRate(remainLots + i))
                     self.upGrids.append(grid)
 
-                self.writeCtaLog(u'重新拉上网格:[{0}~{1}]'.format(upline, upline+self.gridHeight * lots))
+                self.writeCtaLog('重新拉上网格:[{0}~{1}]'.format(upline, upline+self.gridHeight * lots))
 
     def recount_avg_open_price(self):
         """计算网格的平均开仓价"""
@@ -524,7 +524,7 @@ class CtaGridTrade(object):
 
         # 保存上网格列表
         if len(self.upGrids) > 0 and direction == DIRECTION_SHORT:
-            jsonFileName = os.path.join(path, u'data', u'{0}_upGrids.json'.format(self.jsonName))
+            jsonFileName = os.path.join(path, 'data', '{0}_upGrids.json'.format(self.jsonName))
 
             l = []
             for grid in self.upGrids:
@@ -538,7 +538,7 @@ class CtaGridTrade(object):
 
         # 保存上网格列表
         if len(self.dnGrids) > 0 and direction == DIRECTION_LONG:
-            jsonFileName = os.path.join(path, u'data', u'{0}_dnGrids.json'.format(self.jsonName))
+            jsonFileName = os.path.join(path, 'data', '{0}_dnGrids.json'.format(self.jsonName))
 
             l = []
             for grid in self.dnGrids:
@@ -556,20 +556,20 @@ class CtaGridTrade(object):
         path = os.path.abspath(os.path.dirname(__file__))
 
         if direction == DIRECTION_SHORT:
-            jsonFileName = os.path.join(path, u'data', u'{0}_upGrids.json'.format(self.jsonName))
-            self.writeCtaLog(u'开始加载上网格文件{0}'.format(jsonFileName))
+            jsonFileName = os.path.join(path, 'data', '{0}_upGrids.json'.format(self.jsonName))
+            self.writeCtaLog('开始加载上网格文件{0}'.format(jsonFileName))
         if direction == DIRECTION_LONG:
-            jsonFileName = os.path.join(path, u'data', u'{0}_dnGrids.json'.format(self.jsonName))
-            self.writeCtaLog(u'开始加载上网格文件{0}'.format(jsonFileName))
+            jsonFileName = os.path.join(path, 'data', '{0}_dnGrids.json'.format(self.jsonName))
+            self.writeCtaLog('开始加载上网格文件{0}'.format(jsonFileName))
 
         if not os.path.isfile(jsonFileName):
-            self.writeCtaLog(u'网格保存文件{0}不存在'.format(jsonFileName))
+            self.writeCtaLog('网格保存文件{0}不存在'.format(jsonFileName))
             return []
 
         try:
             f = file(jsonFileName)
         except IOError:
-            self.writeCtaLog(u'读取网格出错，请检查')
+            self.writeCtaLog('读取网格出错，请检查')
             return []
 
         # 解析json文件
@@ -583,7 +583,7 @@ class CtaGridTrade(object):
                 openPrice = float(i['openPrice'])
                 stopPrice = float(i['stopPrice'])
 
-                self.writeCtaLog(u'load Grid:open:{0},close:{1},stop:{2}'.format(openPrice, closePrice, stopPrice))
+                self.writeCtaLog('load Grid:open:{0},close:{1},stop:{2}'.format(openPrice, closePrice, stopPrice))
 
                 grid = CtaGrid(direction=i['direction'], openprice=openPrice, closeprice=closePrice,
                                    stopprice=stopPrice, volume=i['volume'])
@@ -612,7 +612,7 @@ class CtaGridTrade(object):
                 grids.append(grid)
 
         else:
-            self.writeCtaLog(u'解析网格出错，设置为空列表')
+            self.writeCtaLog('解析网格出错，设置为空列表')
 
         f.close()
         return grids

@@ -39,15 +39,15 @@ class CtaPosition:
 
         if direction == DIRECTION_LONG:     # 加多仓
             if (max(self.pos, self.longPos) + vol) > self.maxPos:
-                self.writeCtaError(u'异常，超出仓位。净:{0},多:{1},加多:{2},最大:{3}'
+                self.writeCtaError('异常，超出仓位。净:{0},多:{1},加多:{2},最大:{3}'
                                  .format(self.pos, self.longPos, vol, self.maxPos))
 
                 # 只告警
                 #return False
 
             # 更新
-            self.writeCtaLog(u'多仓:{0}->{1}'.format(self.longPos, self.longPos + vol))
-            self.writeCtaLog(u'净:{0}->{1}'.format(self.pos, self.pos + vol))
+            self.writeCtaLog('多仓:{0}->{1}'.format(self.longPos, self.longPos + vol))
+            self.writeCtaLog('净:{0}->{1}'.format(self.pos, self.pos + vol))
             self.longPos += vol
             self.pos += vol
 
@@ -56,12 +56,12 @@ class CtaPosition:
 
         if direction == DIRECTION_SHORT:    # 加空仓
             if (min(self.pos, self.shortPos) - vol) < (0 - self.maxPos):
-                self.writeCtaError(u'异常，超出仓位。净:{0},空:{1},加空:{2},最大:{3}'
+                self.writeCtaError('异常，超出仓位。净:{0},空:{1},加空:{2},最大:{3}'
                                  .format(self.pos, self.shortPos, vol, self.maxPos))
                 #return False
 
-            self.writeCtaLog(u'空仓:{0}->{1}'.format(self.shortPos, self.shortPos - vol))
-            self.writeCtaLog(u'净:{0}->{1}'.format(self.pos, self.pos-vol))
+            self.writeCtaLog('空仓:{0}->{1}'.format(self.shortPos, self.shortPos - vol))
+            self.writeCtaLog('净:{0}->{1}'.format(self.pos, self.pos-vol))
             self.shortPos -= vol
             self.pos -= vol
 
@@ -85,12 +85,12 @@ class CtaPosition:
 
         if direction == DIRECTION_LONG:     # 平空仓 Cover
             if self.shortPos + vol > 0:
-                self.writeCtaError(u'异常，超出仓位。净:{0},空:{1},平仓:{2}'.format(self.pos, self.shortPos, vol))
+                self.writeCtaError('异常，超出仓位。净:{0},空:{1},平仓:{2}'.format(self.pos, self.shortPos, vol))
                 #self.strategy.pos = self.pos
                 #return False
 
-            self.writeCtaLog(u'空仓:{0}->{1}'.format(self.shortPos, self.shortPos + vol))
-            self.writeCtaLog(u'净:{0}->{1}'.format(self.pos, self.pos + vol))
+            self.writeCtaLog('空仓:{0}->{1}'.format(self.shortPos, self.shortPos + vol))
+            self.writeCtaLog('净:{0}->{1}'.format(self.pos, self.pos + vol))
             self.shortPos += vol
             self.pos += vol
 
@@ -99,12 +99,12 @@ class CtaPosition:
 
         if direction == DIRECTION_SHORT:    # 平多仓
             if self.longPos - vol < 0:
-                self.writeCtaError(u'异常，超出仓位。净:{0},多:{1},平仓:{2}'.format(self.pos, self.longPos, vol))
+                self.writeCtaError('异常，超出仓位。净:{0},多:{1},平仓:{2}'.format(self.pos, self.longPos, vol))
                 #self.strategy.pos = self.pos
                 #return False
 
-            self.writeCtaLog(u'多仓:{0}->{1}'.format(self.longPos, self.longPos - vol))
-            self.writeCtaLog(u'净:{0}->{1}'.format(self.pos, self.pos-vol))
+            self.writeCtaLog('多仓:{0}->{1}'.format(self.longPos, self.longPos - vol))
+            self.writeCtaLog('净:{0}->{1}'.format(self.pos, self.pos-vol))
 
             self.longPos -= vol
             self.pos -= vol
@@ -125,7 +125,7 @@ class CtaPosition:
 
     def clear(self):
         """清除状态"""
-        self.writeCtaLog(u'清除所有持仓状态')
+        self.writeCtaLog('清除所有持仓状态')
         self.pos = 0
         self.longPos = 0
         self.shortPos = 0

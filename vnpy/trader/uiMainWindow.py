@@ -2,13 +2,13 @@
 
 # from uiFullMonitorWidget import MonitorWidget
 # from uiKChartWidget import CandleForm
-print 'load uiMainWindows.py'
+print('load uiMainWindows.py')
 import psutil
 
 from vnpy.trader.app.ctaStrategy.uiCtaWidget import CtaEngineManager
 from vnpy.trader.app.dataRecorder.uiDrWidget import DrEngineManager
 from vnpy.trader.app.riskManager.uiRmWidget import RmEngineManager
-from uiBasicWidget import *
+from .uiBasicWidget import *
 
 ########################################################################
 class MainWindow(QtGui.QMainWindow):
@@ -49,14 +49,14 @@ class MainWindow(QtGui.QMainWindow):
     # ----------------------------------------------------------------------
     def initCentral(self):
         """初始化中心区域"""
-        widgetMarketM, dockMarketM = self.createDock(MarketMonitor, u'行情', QtCore.Qt.RightDockWidgetArea)
-        widgetLogM, dockLogM = self.createDock(LogMonitor, u'日志', QtCore.Qt.BottomDockWidgetArea)
-        widgetErrorM, dockErrorM = self.createDock(ErrorMonitor, u'错误', QtCore.Qt.BottomDockWidgetArea)
-        self.widgetTradeM, dockTradeM = self.createDock(TradeMonitor, u'成交', QtCore.Qt.BottomDockWidgetArea)
-        self.widgetOrderM, dockOrderM = self.createDock(OrderMonitor, u'委托', QtCore.Qt.RightDockWidgetArea)
-        widgetPositionM, dockPositionM = self.createDock(PositionMonitor, u'持仓', QtCore.Qt.BottomDockWidgetArea)
-        widgetAccountM, dockAccountM = self.createDock(AccountMonitor, u'资金', QtCore.Qt.BottomDockWidgetArea)
-        widgetTradingW, dockTradingW = self.createDock(TradingWidget, u'交易', QtCore.Qt.LeftDockWidgetArea)
+        widgetMarketM, dockMarketM = self.createDock(MarketMonitor, '行情', QtCore.Qt.RightDockWidgetArea)
+        widgetLogM, dockLogM = self.createDock(LogMonitor, '日志', QtCore.Qt.BottomDockWidgetArea)
+        widgetErrorM, dockErrorM = self.createDock(ErrorMonitor, '错误', QtCore.Qt.BottomDockWidgetArea)
+        self.widgetTradeM, dockTradeM = self.createDock(TradeMonitor, '成交', QtCore.Qt.BottomDockWidgetArea)
+        self.widgetOrderM, dockOrderM = self.createDock(OrderMonitor, '委托', QtCore.Qt.RightDockWidgetArea)
+        widgetPositionM, dockPositionM = self.createDock(PositionMonitor, '持仓', QtCore.Qt.BottomDockWidgetArea)
+        widgetAccountM, dockAccountM = self.createDock(AccountMonitor, '资金', QtCore.Qt.BottomDockWidgetArea)
+        widgetTradingW, dockTradingW = self.createDock(TradingWidget, '交易', QtCore.Qt.LeftDockWidgetArea)
     
         self.tabifyDockWidget(dockTradeM, dockErrorM)
         self.tabifyDockWidget(dockTradeM, dockLogM)
@@ -87,7 +87,7 @@ class MainWindow(QtGui.QMainWindow):
         # connectCtpJR2Action = QtGui.QAction(u'金瑞CTP2', self)
         # connectCtpJR2Action.triggered.connect(self.connectCtpJR2)
 
-        connectCtpAction = QtGui.QAction(u'连接CTP', self)
+        connectCtpAction = QtGui.QAction('连接CTP', self)
         connectCtpAction.triggered.connect(self.connectCtp)
         
         #connectLtsAction = QtGui.QAction(u'连接LTS', self)
@@ -117,44 +117,44 @@ class MainWindow(QtGui.QMainWindow):
         #connectOandaAction = QtGui.QAction(u'连接OANDA', self)
         #connectOandaAction.triggered.connect(self.connectOanda)
         
-        connectDbAction = QtGui.QAction(u'连接数据库', self)
+        connectDbAction = QtGui.QAction('连接数据库', self)
         connectDbAction.triggered.connect(self.mainEngine.dbConnect)
 
-        autoDisconnetAction = QtGui.QAction(u'自动断开重连', self)
+        autoDisconnetAction = QtGui.QAction('自动断开重连', self)
         autoDisconnetAction.triggered.connect(self.setAutoDisconnect)
         
-        testAction = QtGui.QAction(u'测试', self)
+        testAction = QtGui.QAction('测试', self)
         testAction.triggered.connect(self.test)
         
-        exitAction = QtGui.QAction(u'退出', self)
+        exitAction = QtGui.QAction('退出', self)
         exitAction.triggered.connect(self.close)
         
-        aboutAction = QtGui.QAction(u'关于', self)
+        aboutAction = QtGui.QAction('关于', self)
         aboutAction.triggered.connect(self.openAbout)
         
-        contractAction = QtGui.QAction(u'查询合约', self)
+        contractAction = QtGui.QAction('查询合约', self)
         contractAction.triggered.connect(self.openContract)
         
-        drAction = QtGui.QAction(u'行情数据记录', self)
+        drAction = QtGui.QAction('行情数据记录', self)
         drAction.triggered.connect(self.openDr)
         
-        ctaAction = QtGui.QAction(u'CTA策略', self)
+        ctaAction = QtGui.QAction('CTA策略', self)
         ctaAction.triggered.connect(self.openCta)
 
-        spreadAction = QtGui.QAction(u'套利交易', self)
+        spreadAction = QtGui.QAction('套利交易', self)
         spreadAction.triggered.connect(self.openSpread)
 
         #kChart = QtGui.QAction(u'K线图', self)
         #kChart.triggered.connect(self.openKChart)
         
-        rmAction = QtGui.QAction(u'风险管理', self)
+        rmAction = QtGui.QAction('风险管理', self)
         rmAction.triggered.connect(self.openRm)        
         
         # 创建菜单
         menubar = self.menuBar()
         
         # 设计为只显示存在的接口
-        sysMenu = menubar.addMenu(u'系统')
+        sysMenu = menubar.addMenu('系统')
         # sysMenu.addAction(connectCtpProdAction)
         # sysMenu.addAction(connectCtpPostAction)
         # sysMenu.addAction(connectCtpTestAction)
@@ -188,19 +188,19 @@ class MainWindow(QtGui.QMainWindow):
         sysMenu.addSeparator()
         sysMenu.addAction(exitAction)
         
-        functionMenu = menubar.addMenu(u'功能')
+        functionMenu = menubar.addMenu('功能')
         functionMenu.addAction(contractAction)
         functionMenu.addAction(drAction)
         functionMenu.addAction(rmAction)
         
         # 算法相关
-        algoMenu = menubar.addMenu(u'算法')
+        algoMenu = menubar.addMenu('算法')
         algoMenu.addAction(ctaAction)
         algoMenu.addAction(spreadAction)
         #algoMenu.addAction(kChart)
 
         # 帮助
-        helpMenu = menubar.addMenu(u'帮助')
+        helpMenu = menubar.addMenu('帮助')
         helpMenu.addAction(aboutAction)  
         helpMenu.addAction(testAction)
     
@@ -234,27 +234,27 @@ class MainWindow(QtGui.QMainWindow):
             info = self.getCpuMemory()
 
             if self.autoDisConnect:
-                info = info + u'[自动断开重连]'
+                info = info + '[自动断开重连]'
 
             self.statusLabel.setText(info)
 
             if self.connectGatewayDict:
-                s = u''.join(str(e) for e in self.connectGatewayDict.values())
+                s = ''.join(str(e) for e in list(self.connectGatewayDict.values()))
 
                 if not self.connected:
-                    s = s + u' [已断开]'
+                    s = s + ' [已断开]'
 
                 self.setWindowTitle(s)
 
             # 定时断开
             if self.connected and self.trade_off() and self.autoDisConnect:
                self.disconnect()
-               self.mainEngine.writeLog(u'断开连接{0}'.format(self.connectGatewayDict.values()))
-               self.mainEngine.writeLog(u'清空数据引擎')
+               self.mainEngine.writeLog('断开连接{0}'.format(list(self.connectGatewayDict.values())))
+               self.mainEngine.writeLog('清空数据引擎')
                self.mainEngine.clearData()
-               self.mainEngine.writeLog(u'清空委托列表')
+               self.mainEngine.writeLog('清空委托列表')
                self.widgetOrderM.clearData()
-               self.mainEngine.writeLog(u'清空交易列表')
+               self.mainEngine.writeLog('清空交易列表')
                self.widgetTradeM.clearData()
 
             # 定时重连
@@ -263,16 +263,16 @@ class MainWindow(QtGui.QMainWindow):
                     and not self.trade_off()\
                     and len(self.connectGatewayDict) > 0:
 
-                    self.mainEngine.writeLog(u'清空数据引擎')
+                    self.mainEngine.writeLog('清空数据引擎')
                     self.mainEngine.clearData()
-                    self.mainEngine.writeLog(u'清空委托列表')
+                    self.mainEngine.writeLog('清空委托列表')
                     self.widgetOrderM.clearData()
-                    self.mainEngine.writeLog(u'清空交易列表')
+                    self.mainEngine.writeLog('清空交易列表')
                     self.widgetTradeM.clearData()
-                    s = u''.join(str(e) for e in self.connectGatewayDict.values())
-                    self.mainEngine.writeLog(u'重新连接{0}'.format(s))
+                    s = ''.join(str(e) for e in list(self.connectGatewayDict.values()))
+                    self.mainEngine.writeLog('重新连接{0}'.format(s))
 
-                    for key in self.connectGatewayDict.keys():
+                    for key in list(self.connectGatewayDict.keys()):
                         self.mainEngine.connect(key)
 
                     self.connected = True
@@ -282,7 +282,7 @@ class MainWindow(QtGui.QMainWindow):
             today = datetime.now().strftime('%y%m%d')
             if dt.hour == 15 and dt.minute == 1 and len(self.connectGatewayDict) > 0 and today!=self.orderSaveDate:
                 self.orderSaveDate = today
-                self.mainEngine.writeLog(u'保存所有委托记录')
+                self.mainEngine.writeLog('保存所有委托记录')
                 orderfile = os.getcwd() +'/orders/{0}.csv'.format(self.orderSaveDate)
                 if os.path.exists(orderfile):
                     return
@@ -295,7 +295,7 @@ class MainWindow(QtGui.QMainWindow):
                 and today != self.barSaveDate \
                 and self.connected:
                 self.barSaveDate = today
-                self.mainEngine.writeLog(u'调用各策略保存数据')
+                self.mainEngine.writeLog('调用各策略保存数据')
                 self.mainEngine.saveData()
 
             if not (dt.hour == 15 or dt.hour == 2):
@@ -306,100 +306,100 @@ class MainWindow(QtGui.QMainWindow):
         """获取CPU和内存状态信息"""
         cpuPercent = psutil.cpu_percent()
         memoryPercent = psutil.virtual_memory().percent
-        return u'CPU使用率：%d%%   内存使用率：%d%%' % (cpuPercent, memoryPercent)        
+        return 'CPU使用率：%d%%   内存使用率：%d%%' % (cpuPercent, memoryPercent)        
         
     # ----------------------------------------------------------------------
     def connectCtpProd(self):
         """连接上海中期生产环境CTP接口"""
 
         self.mainEngine.connect('CTP_Prod')
-        self.connectGatewayDict['CTP_Prod'] = u'上海中期CTP'
+        self.connectGatewayDict['CTP_Prod'] = '上海中期CTP'
         self.connected = True
 
     # ----------------------------------------------------------------------
     def connectCtpPost(self):
         """连接上海中期盘后CTP接口"""
         self.mainEngine.connect('CTP_Post')
-        self.connectGatewayDict['CTP_Post'] = u'中期盘后CTP'
+        self.connectGatewayDict['CTP_Post'] = '中期盘后CTP'
         self.connected = True
 
     def connectCtpEBF(self):
         """连接光大期货CTP接口"""
         self.mainEngine.connect('CTP_EBF')
-        self.connectGatewayDict['CTP_EBF'] = u'光大CTP'
+        self.connectGatewayDict['CTP_EBF'] = '光大CTP'
         self.connected = True
 
     def connectCtpJR(self):
         """连接金瑞期货CTP接口"""
         self.mainEngine.connect('CTP_JR')
-        self.connectGatewayDict['CTP_JR'] = u'金瑞CTP'
+        self.connectGatewayDict['CTP_JR'] = '金瑞CTP'
         self.connected = True
 
     def connectCtpJR2(self):
         """连接金瑞期货CTP接口"""
         self.mainEngine.connect('CTP_JR2')
-        self.connectGatewayDict['CTP_JR2'] = u'金瑞CTP2'
+        self.connectGatewayDict['CTP_JR2'] = '金瑞CTP2'
         self.connected = True
 
     def connectCtpTest(self):
         """连接SNOW测试环境CTP接口"""
         self.mainEngine.connect('CTP_Test')
-        self.connectGatewayDict['CTP_Test'] = u'SNOW测试'
+        self.connectGatewayDict['CTP_Test'] = 'SNOW测试'
         self.connected = True
 
     def connectCtp(self):
         """连接CTP接口"""
         self.mainEngine.connect('CTP')
-        self.connectGatewayDict['CTP'] = u'CTP'
+        self.connectGatewayDict['CTP'] = 'CTP'
         self.connected = True
 
     # ----------------------------------------------------------------------
     def connectLts(self):
         """连接LTS接口"""
         self.mainEngine.connect('LTS')
-        self.connectGatewayDict['LTS'] = u'LTS'
+        self.connectGatewayDict['LTS'] = 'LTS'
         self.connected = True
         
     #----------------------------------------------------------------------
     def connectKsotp(self):
         """连接金仕达期权接口"""
         self.mainEngine.connect('KSOTP')
-        self.connectGatewayDict['KSOTP'] = u'金仕达期权'
+        self.connectGatewayDict['KSOTP'] = '金仕达期权'
         self.connected = True
         
     #----------------------------------------------------------------------
     def connectFemas(self):
         """连接飞马接口"""
         self.mainEngine.connect('FEMAS')
-        self.connectGatewayDict['FEMAS'] = u'FEMAS飞马'
+        self.connectGatewayDict['FEMAS'] = 'FEMAS飞马'
         self.connected = True
     
     #----------------------------------------------------------------------
     def connectXspeed(self):
         """连接飞马接口"""
         self.mainEngine.connect('XSPEED')
-        self.connectGatewayDict['XSPEED'] = u'XSPEED飞马接口'
+        self.connectGatewayDict['XSPEED'] = 'XSPEED飞马接口'
         self.connected = True
     
     #----------------------------------------------------------------------
     def connectKsgold(self):
         """连接金仕达黄金接口"""
         self.mainEngine.connect('KSGOLD')
-        self.connectGatewayDict ['KSGOLD'] = u'金仕达黄金'
+        self.connectGatewayDict ['KSGOLD'] = '金仕达黄金'
         self.connected = True
         
     #----------------------------------------------------------------------
     def connectSgit(self):
         """连接飞鼠接口"""
         self.mainEngine.connect('SGIT')
-        self.connectGatewayDict['SGIT'] = u'飞鼠'
+        self.connectGatewayDict['SGIT'] = '飞鼠'
         self.connected = True
     
     #----------------------------------------------------------------------
     def connectWind(self):
         """连接Wind接口"""
         self.mainEngine.connect('Wind')
-        self.connectGatewayDict['Wind'] = u'Wind'
+        self.connectGatewayDict['Wind'] = 'Wind'
         self.connected = True
     
     # ----------------------------------------------------------------------
@@ -407,14 +407,14 @@ class MainWindow(QtGui.QMainWindow):
     def connectIb(self):
         """连接Ib"""
         self.mainEngine.connect('IB')
-        self.connectGatewayDict['IB'] = u'盈透'
+        self.connectGatewayDict['IB'] = '盈透'
         self.connected = True
         
     #----------------------------------------------------------------------
     def connectOanda(self):
         """连接OANDA"""
         self.mainEngine.connect('OANDA')
-        self.connectGatewayDict['OANDA'] = u'OANDA'
+        self.connectGatewayDict['OANDA'] = 'OANDA'
         self.connected = True
 
     def setAutoDisconnect(self):
@@ -511,12 +511,12 @@ class MainWindow(QtGui.QMainWindow):
     #----------------------------------------------------------------------
     def closeEvent(self, event):
         """关闭事件"""
-        reply = QtGui.QMessageBox.question(self, u'退出',
-                                           u'确认退出?', QtGui.QMessageBox.Yes | 
+        reply = QtGui.QMessageBox.question(self, '退出',
+                                           '确认退出?', QtGui.QMessageBox.Yes | 
                                            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 
         if reply == QtGui.QMessageBox.Yes: 
-            for widget in self.widgetDict.values():
+            for widget in list(self.widgetDict.values()):
                 widget.close()
             self.saveWindowSettings()
             
@@ -590,9 +590,9 @@ class AboutWidget(QtGui.QDialog):
     # ----------------------------------------------------------------------
     def initUi(self):
         """"""
-        self.setWindowTitle(u'关于VnTrader')
+        self.setWindowTitle('关于VnTrader')
 
-        text = u"""
+        text = """
             Developed by traders, for traders.
 
             License：MIT

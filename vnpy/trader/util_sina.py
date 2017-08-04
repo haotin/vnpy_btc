@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-from __future__ import print_function
+
 
 '''一个简单的SINA数据客户端，主要使用requests开发'''
 import requests
@@ -24,9 +24,9 @@ class UtilSinaClient(object):
         # 从sina加载最新的M1数据
         try:
 
-            url = u'http://stock2.finance.sina.com.cn/futures/api/json.php/InnerFuturesService.getInnerFutures5MLine?symbol={0}'.format(
+            url = 'http://stock2.finance.sina.com.cn/futures/api/json.php/InnerFuturesService.getInnerFutures5MLine?symbol={0}'.format(
                 symbol)
-            self.strategy.writeCtaLog(u'从sina下载{0}Tick数据 {1}'.format(symbol, url))
+            self.strategy.writeCtaLog('从sina下载{0}Tick数据 {1}'.format(symbol, url))
             responses = execjs.eval(self.session.get(url).content.decode('gbk').split('\n')[-1])
 
             datevalue = datetime.now().strftime('%Y-%m-%d')
@@ -42,7 +42,7 @@ class UtilSinaClient(object):
                         datevalue = item[6]
 
                     tick.date = datevalue
-                    tick.time = item[4] + u':00'
+                    tick.time = item[4] + ':00'
                     tick.datetime = datetime.strptime(tick.date + ' ' + tick.time, '%Y-%m-%d %H:%M:%S')
 
                     tick.lastPrice = float(item[0])
@@ -58,7 +58,7 @@ class UtilSinaClient(object):
             return True
 
         except Exception as e:
-            self.strategy.writeCtaLog(u'加载sina历史Tick数据失败：' + str(e))
+            self.strategy.writeCtaLog('加载sina历史Tick数据失败：' + str(e))
             return False
 
     def getTicks2(self, symbol, callback):
@@ -67,7 +67,7 @@ class UtilSinaClient(object):
         try:
 
             #url = u'http://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20t1nf_{0}=/InnerFuturesNewService.getMinLine?symbol={0}'.format(symbol)
-            self.strategy.writeCtaLog(u'从sina下载{0}Tick数据 {1}'.format(symbol, url))
+            self.strategy.writeCtaLog('从sina下载{0}Tick数据 {1}'.format(symbol, url))
 
             response_data= self.session.get(url).content
             response_data = response_data.decode('gbk').split('=')[-1]
@@ -86,7 +86,7 @@ class UtilSinaClient(object):
                     datevalue = item[6]
 
                 tick.date = datevalue
-                tick.time = item[0] + u':00'
+                tick.time = item[0] + ':00'
                 tick.datetime = datetime.strptime(tick.date + ' ' + tick.time, '%Y-%m-%d %H:%M:%S')
 
                 tick.lastPrice = float(item[1])
@@ -102,16 +102,16 @@ class UtilSinaClient(object):
             return True
 
         except Exception as e:
-            self.strategy.writeCtaLog(u'加载sina历史Tick数据失败：' + str(e))
+            self.strategy.writeCtaLog('加载sina历史Tick数据失败：' + str(e))
             return False
 
     def getTicks3(self, symbol, callback):
 
         # 从sina加载最新的5日内M1数据(针对中金所）
         try:
-            url = u'http://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20t5nf_{0}=/InnerFuturesNewService.getFourDaysLine?symbol={0}'.format(symbol)
+            url = 'http://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20t5nf_{0}=/InnerFuturesNewService.getFourDaysLine?symbol={0}'.format(symbol)
 
-            self.strategy.writeCtaLog(u'从sina下载{0}Tick数据 {1}'.format(symbol, url))
+            self.strategy.writeCtaLog('从sina下载{0}Tick数据 {1}'.format(symbol, url))
 
             response_data= self.session.get(url).content
             response_data = response_data.decode('gbk').split('=')[-1]
@@ -131,7 +131,7 @@ class UtilSinaClient(object):
                         datevalue = item[6]
 
                     tick.date = datevalue
-                    tick.time = item[0] + u':00'
+                    tick.time = item[0] + ':00'
                     tick.datetime = datetime.strptime(tick.date + ' ' + tick.time, '%Y-%m-%d %H:%M:%S')
 
                     tick.lastPrice = float(item[1])
@@ -147,7 +147,7 @@ class UtilSinaClient(object):
             return True
 
         except Exception as e:
-            self.strategy.writeCtaLog(u'加载sina历史Tick数据失败：' + str(e))
+            self.strategy.writeCtaLog('加载sina历史Tick数据失败：' + str(e))
             return False
 
     def getMinBars(self, symbol, minute, callback):
@@ -159,8 +159,8 @@ class UtilSinaClient(object):
         sinaBars = []
         try:
 
-            url = u'http://stock2.finance.sina.com.cn/futures/api/json.php/InnerFuturesService.getInnerFutures{0}MinKLine?symbol={1}'.format(minute,symbol)
-            self.strategy.writeCtaLog(u'从sina下载{0}的{1}分钟数据 {2}'.format(symbol,minute, url))
+            url = 'http://stock2.finance.sina.com.cn/futures/api/json.php/InnerFuturesService.getInnerFutures{0}MinKLine?symbol={1}'.format(minute,symbol)
+            self.strategy.writeCtaLog('从sina下载{0}的{1}分钟数据 {2}'.format(symbol,minute, url))
             responses = execjs.eval(self.session.get(url).content.decode('gbk').split('\n')[-1])
             dayVolume = 0
 
@@ -205,7 +205,7 @@ class UtilSinaClient(object):
                 sinaBars.append(bar)
 
             if len(sinaBars)>0:
-                self.strategy.writeCtaLog(u'从sina读取了{0}条{1}分钟数据'.format(len(sinaBars),minute))
+                self.strategy.writeCtaLog('从sina读取了{0}条{1}分钟数据'.format(len(sinaBars),minute))
 
                 # 把sina的bar灌入回调函数
                 for bar in sinaBars:
@@ -216,11 +216,11 @@ class UtilSinaClient(object):
 
                 return True
             else:
-                self.strategy.writeCtaLog(u'从sina读取{0}分钟数据失败'.format(minute))
+                self.strategy.writeCtaLog('从sina读取{0}分钟数据失败'.format(minute))
                 return False
 
         except Exception as e:
-            self.strategy.writeCtaLog(u'加载Sina历史分钟数据失败：'+str(e))
+            self.strategy.writeCtaLog('加载Sina历史分钟数据失败：'+str(e))
             return False
 
     def getMinBars2(self, symbol, minute, callback):
@@ -232,9 +232,9 @@ class UtilSinaClient(object):
         sinaBars = []
         try:
             timestamp = (datetime.utcnow() - datetime(1970, 1, 1)).total_seconds()
-            url=u'http://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_{1}_{0}_{2}=/InnerFuturesNewService.getFewMinLine?symbol={1}&type={0}'.format(minute,symbol,timestamp)
+            url='http://stock2.finance.sina.com.cn/futures/api/jsonp.php/var%20_{1}_{0}_{2}=/InnerFuturesNewService.getFewMinLine?symbol={1}&type={0}'.format(minute,symbol,timestamp)
             #url = u'http://stock2.finance.sina.com.cn/futures/api/json.php/InnerFuturesService.getInnerFutures{0}MinKLine?symbol={1}'.format(minute,symbol)
-            self.strategy.writeCtaLog(u'从sina下载{0}的{1}分钟数据 {2}'.format(symbol,minute, url))
+            self.strategy.writeCtaLog('从sina下载{0}的{1}分钟数据 {2}'.format(symbol,minute, url))
             response_data = self.session.get(url).content
             response_data = response_data.decode('gbk').split('=')[-1]
             response_data = response_data.replace('(', '')
@@ -284,7 +284,7 @@ class UtilSinaClient(object):
                 sinaBars.append(bar)
 
             if len(sinaBars)>0:
-                self.strategy.writeCtaLog(u'从sina读取了{0}条{1}分钟数据'.format(len(sinaBars),minute))
+                self.strategy.writeCtaLog('从sina读取了{0}条{1}分钟数据'.format(len(sinaBars),minute))
 
                 # 把sina的bar灌入回调函数
                 for bar in sinaBars:
@@ -295,11 +295,11 @@ class UtilSinaClient(object):
 
                 return True
             else:
-                self.strategy.writeCtaLog(u'从sina读取{0}分钟数据失败'.format(minute))
+                self.strategy.writeCtaLog('从sina读取{0}分钟数据失败'.format(minute))
                 return False
 
         except Exception as e:
-            self.strategy.writeCtaLog(u'加载Sina历史分钟数据失败：'+str(e))
+            self.strategy.writeCtaLog('加载Sina历史分钟数据失败：'+str(e))
             return False
 
     def getDayBars(self, symbol, callback):
@@ -309,8 +309,8 @@ class UtilSinaClient(object):
 
         try:
 
-            url = u'http://stock.finance.sina.com.cn/futures/api/json.php/InnerFuturesService.getInnerFuturesDailyKLine?symbol={0}'.format(symbol)
-            self.strategy.writeCtaLog(u'从sina下载{0}的日K数据 {1}'.format(symbol, url))
+            url = 'http://stock.finance.sina.com.cn/futures/api/json.php/InnerFuturesService.getInnerFuturesDailyKLine?symbol={0}'.format(symbol)
+            self.strategy.writeCtaLog('从sina下载{0}的日K数据 {1}'.format(symbol, url))
             responses = execjs.eval(self.session.get(url).content.decode('gbk'))
             dayVolume = 0
 
@@ -335,7 +335,7 @@ class UtilSinaClient(object):
                 sinaBars.append(bar)
 
             if len(sinaBars)>0:
-                self.strategy.writeCtaLog(u'从sina读取了{0}条日线K数据'.format(len(sinaBars)))
+                self.strategy.writeCtaLog('从sina读取了{0}条日线K数据'.format(len(sinaBars)))
 
                 # 把sina的bar灌入回调函数
                 for bar in sinaBars:
@@ -346,11 +346,11 @@ class UtilSinaClient(object):
 
                 return True
             else:
-                self.strategy.writeCtaLog(u'从sina读取日线K数据失败')
+                self.strategy.writeCtaLog('从sina读取日线K数据失败')
                 return False
 
         except Exception as e:
-            self.strategy.writeCtaLog(u'加载Sina历史日线数据失败：'+str(e))
+            self.strategy.writeCtaLog('加载Sina历史日线数据失败：'+str(e))
             return False
 
 class TestStrategy(object):
@@ -359,10 +359,10 @@ class TestStrategy(object):
         pass
 
     def addBar(self, bar):
-        print(u'{0},o:{1},h:{2},l:{3},c:{4},v:{5}'.format(bar.datetime, bar.open, bar.high, bar.low, bar.close, bar.volume))
+        print('{0},o:{1},h:{2},l:{3},c:{4},v:{5}'.format(bar.datetime, bar.open, bar.high, bar.low, bar.close, bar.volume))
 
     def addTick(self, tick):
-        print(u'{0},{1},ap:{2},av:{3},bp:{4},bv:{5}'.format(tick.datetime, tick.lastPrice, tick.askPrice1, tick.askVolume1, tick.bidPrice1, tick.bidVolume1))
+        print('{0},{1},ap:{2},av:{3},bp:{4},bv:{5}'.format(tick.datetime, tick.lastPrice, tick.askPrice1, tick.askVolume1, tick.bidPrice1, tick.bidVolume1))
 
     def writeCtaLog(self, content):
         print(content)

@@ -6,13 +6,13 @@ vn.ctp的gateway接入
 考虑到现阶段大部分CTP中的ExchangeID字段返回的都是空值
 vtSymbol直接使用symbol
 '''
-print 'loading ctpGateway.py'
+print('loading ctpGateway.py')
 import os
 import json
 
 # 加载经booster编译转换的SO API库
-from vnctpmd import MdApi
-from vnctptd import TdApi
+from .vnctpmd import MdApi
+from .vnctptd import TdApi
 
 from vnpy.trader.vtConstant import  *
 from vnpy.trader.vtGateway import *
@@ -24,13 +24,13 @@ from vnpy.trader.gateway.ctpGateway.ctpDataType import *
 priceTypeMap = {}
 priceTypeMap[PRICETYPE_LIMITPRICE] = defineDict["THOST_FTDC_OPT_LimitPrice"]
 priceTypeMap[PRICETYPE_MARKETPRICE] = defineDict["THOST_FTDC_OPT_AnyPrice"]
-priceTypeMapReverse = {v: k for k, v in priceTypeMap.items()} 
+priceTypeMapReverse = {v: k for k, v in list(priceTypeMap.items())} 
 
 # 方向类型映射
 directionMap = {}
 directionMap[DIRECTION_LONG] = defineDict['THOST_FTDC_D_Buy']
 directionMap[DIRECTION_SHORT] = defineDict['THOST_FTDC_D_Sell']
-directionMapReverse = {v: k for k, v in directionMap.items()}
+directionMapReverse = {v: k for k, v in list(directionMap.items())}
 
 # 开平类型映射
 offsetMap = {}
@@ -38,7 +38,7 @@ offsetMap[OFFSET_OPEN] = defineDict['THOST_FTDC_OF_Open']
 offsetMap[OFFSET_CLOSE] = defineDict['THOST_FTDC_OF_Close']
 offsetMap[OFFSET_CLOSETODAY] = defineDict['THOST_FTDC_OF_CloseToday']
 offsetMap[OFFSET_CLOSEYESTERDAY] = defineDict['THOST_FTDC_OF_CloseYesterday']
-offsetMapReverse = {v:k for k,v in offsetMap.items()}
+offsetMapReverse = {v:k for k,v in list(offsetMap.items())}
 
 # 交易所类型映射
 exchangeMap = {}
@@ -49,21 +49,21 @@ exchangeMap[EXCHANGE_DCE] = 'DCE'
 exchangeMap[EXCHANGE_SSE] = 'SSE'
 exchangeMap[EXCHANGE_INE] = 'INE'
 exchangeMap[EXCHANGE_UNKNOWN] = ''
-exchangeMapReverse = {v:k for k,v in exchangeMap.items()}
+exchangeMapReverse = {v:k for k,v in list(exchangeMap.items())}
 
 # 持仓类型映射
 posiDirectionMap = {}
 posiDirectionMap[DIRECTION_NET] = defineDict["THOST_FTDC_PD_Net"]
 posiDirectionMap[DIRECTION_LONG] = defineDict["THOST_FTDC_PD_Long"]
 posiDirectionMap[DIRECTION_SHORT] = defineDict["THOST_FTDC_PD_Short"]
-posiDirectionMapReverse = {v:k for k,v in posiDirectionMap.items()}
+posiDirectionMapReverse = {v:k for k,v in list(posiDirectionMap.items())}
 
 # 产品类型映射
 productClassMap = {}
 productClassMap[PRODUCT_FUTURES] = defineDict["THOST_FTDC_PC_Futures"]
 productClassMap[PRODUCT_OPTION] = defineDict["THOST_FTDC_PC_Options"]
 productClassMap[PRODUCT_COMBINATION] = defineDict["THOST_FTDC_PC_Combination"]
-productClassMapReverse = {v:k for k,v in productClassMap.items()}
+productClassMapReverse = {v:k for k,v in list(productClassMap.items())}
 
 # 委托状态映射
 statusMap = {}
@@ -71,7 +71,7 @@ statusMap[STATUS_ALLTRADED] = defineDict["THOST_FTDC_OST_AllTraded"]
 statusMap[STATUS_PARTTRADED] = defineDict["THOST_FTDC_OST_PartTradedQueueing"]
 statusMap[STATUS_NOTTRADED] = defineDict["THOST_FTDC_OST_NoTradeQueueing"]
 statusMap[STATUS_CANCELLED] = defineDict["THOST_FTDC_OST_Canceled"]
-statusMapReverse = {v:k for k,v in statusMap.items()}
+statusMapReverse = {v:k for k,v in list(statusMap.items())}
 
 
 ########################################################################
@@ -102,16 +102,16 @@ class CtpGateway(VtGateway):
         path = os.path.abspath(os.path.dirname(__file__))
         fileName = os.path.join(path, fileName)
         if self.mdApi is None:
-            self.writeLog(u'行情接口未实例化，创建实例')
+            self.writeLog('行情接口未实例化，创建实例')
             self.mdApi = CtpMdApi(self)     # 行情API
         else:
-            self.writeLog(u'行情接口已实例化')
+            self.writeLog('行情接口已实例化')
 
         if self.tdApi is None:
-            self.writeLog(u'交易接口未实例化，创建实例')
+            self.writeLog('交易接口未实例化，创建实例')
             self.tdApi = CtpTdApi(self)     # 交易API
         else:
-            self.writeLog(u'交易接口已实例化')
+            self.writeLog('交易接口已实例化')
         try:
             f = file(fileName)
         except IOError:
@@ -141,9 +141,9 @@ class CtpGateway(VtGateway):
             return
         
         # 创建行情和交易接口对象
-        self.writeLog(u'连接行情服务器')
+        self.writeLog('连接行情服务器')
         self.mdApi.connect(userID, password, brokerID, mdAddress)
-        self.writeLog(u'连接交易服务器')
+        self.writeLog('连接交易服务器')
         self.tdApi.connect(userID, password, brokerID, tdAddress, authCode, userProductInfo)
         self.setQryEnabled(True)
         # 初始化并启动查询
@@ -213,7 +213,7 @@ class CtpGateway(VtGateway):
             tmp2.close()
             self.tdConnected = False
 
-        self.writeLog(u'主动断开连接')
+        self.writeLog('主动断开连接')
         
     #----------------------------------------------------------------------
     def initQuery(self):
@@ -383,7 +383,7 @@ class CtpMdApi(MdApi):
         tick.gatewayName = self.gatewayName
         
         tick.symbol = data['InstrumentID']
-        tick.exchange = exchangeMapReverse.get(data['ExchangeID'], u'未知')
+        tick.exchange = exchangeMapReverse.get(data['ExchangeID'], '未知')
         tick.vtSymbol = tick.symbol #'.'.join([tick.symbol, EXCHANGE_UNKNOWN])
         
         tick.lastPrice = data['LastPrice']
@@ -459,12 +459,12 @@ class CtpMdApi(MdApi):
         # 这里的设计是，如果尚未登录就调用了订阅方法
         # 则先保存订阅请求，登录完成后会自动订阅
         if self.loginStatus:
-            print u'subscribe {0}'.format(str(subscribeReq.symbol))
+            print('subscribe {0}'.format(str(subscribeReq.symbol)))
             self.subscribeMarketData(str(subscribeReq.symbol))
-            self.writeLog(u'订阅合约:{0}'.format(str(subscribeReq.symbol)))
+            self.writeLog('订阅合约:{0}'.format(str(subscribeReq.symbol)))
         else:
-            print u'not login, add {0} into subscribe list'.format(str(subscribeReq.symbol))
-            self.writeLog(u'未连接，增加合约{0}至待订阅列表'.format(str(subscribeReq.symbol)))
+            print('not login, add {0} into subscribe list'.format(str(subscribeReq.symbol)))
+            self.writeLog('未连接，增加合约{0}至待订阅列表'.format(str(subscribeReq.symbol)))
         self.subscribedSymbols.add(subscribeReq)   
         
     #----------------------------------------------------------------------
@@ -651,7 +651,7 @@ class CtpTdApi(TdApi):
         err.gatewayName = self.gatewayName
         err.errorID = error['ErrorID']
         err.errorMsg = error['ErrorMsg'].decode('gbk')
-        err.additionalInfo = u'onRspOrderInsert():{0},{1},{2},{3}'.\
+        err.additionalInfo = 'onRspOrderInsert():{0},{1},{2},{3}'.\
             format(order.vtSymbol, order.orderID, order.direction , order.offset)
         self.gateway.onError(err)
     
@@ -671,13 +671,13 @@ class CtpTdApi(TdApi):
         try:
             symbol = data['InstrumentID']
         except KeyError:
-            symbol = u'KEYERROR'
+            symbol = 'KEYERROR'
 
         err = VtErrorData()
         err.gatewayName = self.gatewayName
         err.errorID = error['ErrorID']
         err.errorMsg = error['ErrorMsg'].decode('gbk')
-        err.additionalInfo = u'onRspOrderAction,{0}'.format(symbol)
+        err.additionalInfo = 'onRspOrderAction,{0}'.format(symbol)
         self.gateway.onError(err)
     
     #----------------------------------------------------------------------
@@ -791,7 +791,7 @@ class CtpTdApi(TdApi):
         # 查询回报结束
         if last:
             # 遍历推送
-            for pos in self.posDict.values():
+            for pos in list(self.posDict.values()):
                 self.gateway.onPosition(pos)
     
             # 清空缓存
@@ -1045,7 +1045,7 @@ class CtpTdApi(TdApi):
         err = VtErrorData()
         err.gatewayName = self.gatewayName
         err.errorID = error['ErrorID']
-        err.errorMsg = u'onRspError' + error['ErrorMsg'].decode('gbk')
+        err.errorMsg = 'onRspError' + error['ErrorMsg'].decode('gbk')
         self.gateway.onError(err)
     
     #----------------------------------------------------------------------
@@ -1143,7 +1143,7 @@ class CtpTdApi(TdApi):
         err.gatewayName = self.gatewayName
         err.errorID = error['ErrorID']
         err.errorMsg = error['ErrorMsg'].decode('gbk')
-        err.additionalInfo = u'onErrRtnOrderInsert.{0},v:{1},ref:{2}:'\
+        err.additionalInfo = 'onErrRtnOrderInsert.{0},v:{1},ref:{2}:'\
             .format(order.vtSymbol , order.totalVolume, order.orderID)
         self.gateway.onError(err)
     
@@ -1157,7 +1157,7 @@ class CtpTdApi(TdApi):
         err.gatewayName = self.gatewayName
         err.errorID = error['ErrorID']
         err.errorMsg = error['ErrorMsg'].decode('gbk')
-        err.additionalInfo =u'onErrRtnOrderAction.{0}'.format(symbol)
+        err.additionalInfo ='onErrRtnOrderAction.{0}'.format(symbol)
         self.gateway.onError(err)
     
     #----------------------------------------------------------------------
@@ -1546,7 +1546,7 @@ def test():
     
     def print_log(event):
         log = event.dict_['data']
-        print ':'.join([log.logTime, log.logContent])
+        print(':'.join([log.logTime, log.logContent]))
     
     app = QtCore.QCoreApplication(sys.argv)    
 

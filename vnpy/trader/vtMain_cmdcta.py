@@ -3,7 +3,7 @@
 import sys
 import ctypes
 import time
-from vtEngine import MainEngine
+from .vtEngine import MainEngine
 from vnpy.event.eventEngine import *
 
 
@@ -32,11 +32,11 @@ def run(gateway, strategyName):
     # mainEngine.dbConnect()
     # time.sleep(1)
 
-    print "connet %s.........." % gateway
+    print("connet %s.........." % gateway)
     mainEngine.connect(gateway)
     time.sleep(2)
 
-    print "start strategy %s......." % strategyName
+    print("start strategy %s......." % strategyName)
     mainEngine.ctaEngine.loadSetting()
     mainEngine.ctaEngine.initStrategy(strategyName)
     mainEngine.ctaEngine.startStrategy(strategyName)

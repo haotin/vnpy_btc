@@ -57,7 +57,7 @@ def main():
     mainEngine = MainEngine()
 
     for gw_name in init_gateway_names['CTP']:
-        print 'add {0}'.format(gw_name)
+        print('add {0}'.format(gw_name))
         mainEngine.addGateway(ctpGateway, gw_name)
 
     mainWindow = MainWindow(mainEngine, mainEngine.eventEngine)

@@ -10,7 +10,7 @@ from collections import OrderedDict
 from vnpy.trader.vtEvent import *
 from vnpy.trader.vtFunction import *
 from vnpy.trader.vtGateway import *
-import vtText
+from . import vtText
 from vnpy.trader.uiQt import QtGui, QtCore, BASIC_FONT
 
 QCOLOR_RED = QtGui.QColor('red')
@@ -230,7 +230,7 @@ class BasicMonitor(QtGui.QTableWidget):
     def setHeaderDict(self, headerDict):
         """设置表头有序字典"""
         self.headerDict = headerDict
-        self.headerList = headerDict.keys()
+        self.headerList = list(headerDict.keys())
         
     #----------------------------------------------------------------------
     def setDataKey(self, dataKey):
@@ -260,7 +260,7 @@ class BasicMonitor(QtGui.QTableWidget):
         self.setColumnCount(col)
         
         # 设置列表头
-        labels = [d['chinese'] for d in self.headerDict.values()]
+        labels = [d['chinese'] for d in list(self.headerDict.values())]
         self.setHorizontalHeaderLabels(labels)
         
         # 关闭左边的垂直表头
@@ -371,11 +371,11 @@ class BasicMonitor(QtGui.QTableWidget):
             path = QtGui.QFileDialog.getSaveFileName(self, vtText.SAVE_DATA, '', 'CSV(*.csv)')
 
         log = VtLogData()
-        log.gatewayName = u'-'
+        log.gatewayName = '-'
 
         try:
             if not os.path.exists(path):
-                with open(unicode(path), 'wb') as f:
+                with open(str(path), 'wb') as f:
                     writer = csv.writer(f)
                     
                     # 保存标签
@@ -389,15 +389,15 @@ class BasicMonitor(QtGui.QTableWidget):
                             item = self.item(row, column)
                             if item is not None:
                                 rowdata.append(
-                                    unicode(item.text()).encode('gbk'))
+                                    str(item.text()).encode('gbk'))
                             else:
                                 rowdata.append('')
                         writer.writerow(rowdata)
 
-                log.logContent = u'数据保存至:{0}'.format(path)
+                log.logContent = '数据保存至:{0}'.format(path)
 
         except IOError:
-            log.logContent = u'文件IO失败:{0}'.format(path)
+            log.logContent = '文件IO失败:{0}'.format(path)
 
             event1 = Event(type_=EVENT_LOG)
             event1.dict_['data'] = log
@@ -505,7 +505,7 @@ class ErrorMonitor(BasicMonitor):
         d['errorID'] = {'chinese':vtText.ERROR_CODE, 'cellType':BasicCell}
         d['errorMsg'] = {'chinese':vtText.ERROR_MESSAGE, 'cellType':BasicCell}
         d['gatewayName'] = {'chinese':vtText.GATEWAY, 'cellType':BasicCell}
-        d['additionalInfo'] = {'chinese': u'补充信息', 'cellType': BasicCell}
+        d['additionalInfo'] = {'chinese': '补充信息', 'cellType': BasicCell}
 
         self.setHeaderDict(d)
         
@@ -742,7 +742,7 @@ class TradingWidget(QtGui.QFrame):
         labelDirection = QtGui.QLabel(vtText.DIRECTION)
         labelOffset = QtGui.QLabel(vtText.OFFSET)
         labelPrice = QtGui.QLabel(vtText.PRICE)
-        self.checkFixed = QtGui.QCheckBox(u'')  # 价格固定选择框
+        self.checkFixed = QtGui.QCheckBox('')  # 价格固定选择框
         labelVolume = QtGui.QLabel(vtText.VOLUME)
         labelPriceType = QtGui.QLabel(vtText.PRICE_TYPE)
         labelExchange = QtGui.QLabel(vtText.EXCHANGE)
@@ -922,10 +922,10 @@ class TradingWidget(QtGui.QFrame):
         """合约变化"""
         # 读取组件数据
         symbol = str(self.lineSymbol.text())
-        exchange = unicode(self.comboExchange.currentText())
-        currency = unicode(self.comboCurrency.currentText())
-        productClass = unicode(self.comboProductClass.currentText())           
-        gatewayName = unicode(self.comboGateway.currentText())
+        exchange = str(self.comboExchange.currentText())
+        currency = str(self.comboCurrency.currentText())
+        productClass = str(self.comboProductClass.currentText())           
+        gatewayName = str(self.comboGateway.currentText())
         
         # 查询合约
         if exchange:
@@ -1039,10 +1039,10 @@ class TradingWidget(QtGui.QFrame):
     def sendOrder(self):
         """发单"""
         symbol = str(self.lineSymbol.text())
-        exchange = unicode(self.comboExchange.currentText())
-        currency = unicode(self.comboCurrency.currentText())
-        productClass = unicode(self.comboProductClass.currentText())           
-        gatewayName = unicode(self.comboGateway.currentText())        
+        exchange = str(self.comboExchange.currentText())
+        currency = str(self.comboCurrency.currentText())
+        productClass = str(self.comboProductClass.currentText())           
+        gatewayName = str(self.comboGateway.currentText())        
 
         # 查询合约
         if exchange:
@@ -1062,9 +1062,9 @@ class TradingWidget(QtGui.QFrame):
         req.exchange = exchange
         req.price = self.spinPrice.value()
         req.volume = self.spinVolume.value()
-        req.direction = unicode(self.comboDirection.currentText())
-        req.priceType = unicode(self.comboPriceType.currentText())
-        req.offset = unicode(self.comboOffset.currentText())
+        req.direction = str(self.comboDirection.currentText())
+        req.priceType = str(self.comboPriceType.currentText())
+        req.offset = str(self.comboOffset.currentText())
         req.currency = currency
         req.productClass = productClass
         
@@ -1155,7 +1155,7 @@ class ContractMonitor(BasicMonitor):
     #----------------------------------------------------------------------
     def initUi(self):
         """初始化界面"""
-        self.setWindowTitle(u'合约查询')
+        self.setWindowTitle('合约查询')
         self.setMinimumSize(800, 800)
         self.setFont(BASIC_FONT)
         self.initTable()
@@ -1166,7 +1166,7 @@ class ContractMonitor(BasicMonitor):
         """显示所有合约数据"""
         l = self.mainEngine.getAllContracts()
         d = {'.'.join([contract.exchange, contract.symbol]):contract for contract in l}
-        l2 = d.keys()
+        l2 = list(d.keys())
         l2.sort(reverse=True)
 
         self.setRowCount(len(l2))

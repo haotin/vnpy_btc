@@ -16,7 +16,7 @@ from datetime import datetime
 from time import sleep
 from threading import Thread
 
-import vtEvent
+from . import vtEvent
 from vnpy.rpc import RpcServer
 from vnpy.trader.vtEngine import MainEngine
 
@@ -37,7 +37,7 @@ class VtServer(RpcServer):
         self.engine = MainEngine()
 
         for gw_name in init_gateway_names['CTP']:
-            print 'add {0}'.format(gw_name)
+            print('add {0}'.format(gw_name))
             self.engine.addGateway(ctpGateway, gw_name)
 
         # 注册主引擎的方法到服务器的RPC函数
@@ -84,7 +84,7 @@ class VtServer(RpcServer):
 #----------------------------------------------------------------------
 def printLog(content):
     """打印日志"""
-    print datetime.now().strftime("%H:%M:%S"), '\t', content
+    print(datetime.now().strftime("%H:%M:%S"), '\t', content)
 
 
 #----------------------------------------------------------------------
@@ -98,16 +98,16 @@ def runServer():
     server.start()
     
     printLog('-'*50)
-    printLog(u'vn.trader服务器已启动')
+    printLog('vn.trader服务器已启动')
     
     # 进入主循环
     while True:
-        printLog(u'请输入exit来关闭服务器')
-        if raw_input() != 'exit':
+        printLog('请输入exit来关闭服务器')
+        if input() != 'exit':
             continue
 
-        printLog(u'确认关闭服务器？yes|no')
-        if raw_input() == 'yes':
+        printLog('确认关闭服务器？yes|no')
+        if input() == 'yes':
             break
     
     server.stopServer()

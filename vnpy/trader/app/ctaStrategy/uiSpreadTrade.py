@@ -35,28 +35,28 @@ class SpreadTradeManager(QtGui.QWidget):
     # ----------------------------------------------------------------------
     def initUi(self):
         """初始化界面"""
-        self.setWindowTitle(u'套利交易')
+        self.setWindowTitle('套利交易')
 
         # 连接运行中的套利测试（策略名称[下拉菜单]，连接按钮）
-        self.btnSwitchConnectStatus = QtGui.QPushButton(u'套利策略未连接')
+        self.btnSwitchConnectStatus = QtGui.QPushButton('套利策略未连接')
         self.btnSwitchConnectStatus.clicked.connect(self.btnSwitchClick)
 
         Label = QtGui.QLabel
         grid = QtGui.QGridLayout()
-        grid.addWidget(Label(u'状态'), 0, 0)
+        grid.addWidget(Label('状态'), 0, 0)
         grid.addWidget(self.btnSwitchConnectStatus, 0, 1)
 
         self.spreadStraty = QtGui.QComboBox()
-        self.strategy_name_list = self.ctaEngine.strategyDict.keys()
+        self.strategy_name_list = list(self.ctaEngine.strategyDict.keys())
         self.spreadStraty.addItems(self.strategy_name_list)
 
-        grid.addWidget(Label(u'套利策略'), 1, 0)
+        grid.addWidget(Label('套利策略'), 1, 0)
         grid.addWidget(self.spreadStraty, 1, 1)
 
 
         # 网格信息+操作（新增，删除，更新）
 
-        grid.addWidget(Label(u'方向'), 2, 0)
+        grid.addWidget(Label('方向'), 2, 0)
         self.gridDirection = QtGui.QComboBox()
         self.gridDirection.addItems(self.directionList)
         grid.addWidget(self.gridDirection, 2, 1)
@@ -67,7 +67,7 @@ class SpreadTradeManager(QtGui.QWidget):
         self.spinOpenPrice.setMaximum(100000)
         self.spinOpenPrice.valueChanged.connect(self.spinOpenPrice_valueChanged)
 
-        grid.addWidget(Label(u'开仓价'), 3, 0)
+        grid.addWidget(Label('开仓价'), 3, 0)
         grid.addWidget(self.spinOpenPrice, 3, 1)
 
         self.spinClosePrice = QtGui.QDoubleSpinBox()
@@ -75,42 +75,42 @@ class SpreadTradeManager(QtGui.QWidget):
         self.spinClosePrice.setMinimum(-10000)  # 原来是0，为支持套利，改为-10000
         self.spinClosePrice.setMaximum(100000)
 
-        grid.addWidget(Label(u'平仓价'), 4, 0)
+        grid.addWidget(Label('平仓价'), 4, 0)
         grid.addWidget(self.spinClosePrice, 4, 1)
 
         self.spinOrderVolume = QtGui.QSpinBox()
         self.spinOrderVolume.setMinimum(0)
         self.spinOrderVolume.setMaximum(1000)
 
-        grid.addWidget(Label(u'委托数量'), 5, 0)
+        grid.addWidget(Label('委托数量'), 5, 0)
         grid.addWidget(self.spinOrderVolume, 5, 1)
 
         self.spinTradedVolume = QtGui.QSpinBox()
         self.spinTradedVolume.setMinimum(0)
         self.spinTradedVolume.setMaximum(1000)
 
-        grid.addWidget(Label(u'成交数量'), 6, 0)
+        grid.addWidget(Label('成交数量'), 6, 0)
         grid.addWidget(self.spinTradedVolume, 6, 1)
 
-        self.openStatus = QtGui.QCheckBox(u'')  # 开仓状态
-        grid.addWidget(Label(u'开仓状态'), 7, 0)
+        self.openStatus = QtGui.QCheckBox('')  # 开仓状态
+        grid.addWidget(Label('开仓状态'), 7, 0)
         grid.addWidget(self.openStatus, 7, 1)
 
-        self.orderStatus = QtGui.QCheckBox(u'')  # 委托状态
-        grid.addWidget(Label(u'委托状态'), 8, 0)
+        self.orderStatus = QtGui.QCheckBox('')  # 委托状态
+        grid.addWidget(Label('委托状态'), 8, 0)
         grid.addWidget(self.orderStatus, 8, 1)
 
-        self.closeStatus = QtGui.QCheckBox(u'')  # 平仓状态
-        grid.addWidget(Label(u'平仓状态'), 9, 0)
+        self.closeStatus = QtGui.QCheckBox('')  # 平仓状态
+        grid.addWidget(Label('平仓状态'), 9, 0)
         grid.addWidget(self.closeStatus, 9, 1)
 
-        btnAddGrid = QtGui.QPushButton(u'增加')
+        btnAddGrid = QtGui.QPushButton('增加')
         btnAddGrid.clicked.connect(self.btnAddGridClick)
-        btnUpdateGrid = QtGui.QPushButton(u'更新')
+        btnUpdateGrid = QtGui.QPushButton('更新')
         btnUpdateGrid.clicked.connect(self.btnUpdateGridClick)
-        btnRemoveGrid = QtGui.QPushButton(u'删除')
+        btnRemoveGrid = QtGui.QPushButton('删除')
         btnRemoveGrid.clicked.connect(self.btnRemoveGridClick)
-        btnRemoveAll = QtGui.QPushButton(u'全删除')
+        btnRemoveAll = QtGui.QPushButton('全删除')
         btnRemoveAll.clicked.connect(self.btnRemoveAllClick)
 
         hbox = QtGui.QHBoxLayout()
@@ -138,48 +138,48 @@ class SpreadTradeManager(QtGui.QWidget):
     def btnSwitchClick(self):
         """策略连接按钮"""
         if self.ctaEngine is None:
-            self.log(u'没有连接CTA引擎')
+            self.log('没有连接CTA引擎')
             return
 
-        strategy_name = unicode(self.spreadStraty.currentText())
+        strategy_name = str(self.spreadStraty.currentText())
 
         if strategy_name is None or len(strategy_name) == 0:
             if len(self.strategy_name_list)==0:
-                self.strategy_name_list = self.ctaEngine.strategyDict.keys()
+                self.strategy_name_list = list(self.ctaEngine.strategyDict.keys())
                 self.spreadStraty.addItems(self.strategy_name_list)
             return
 
         self.strategy = self.ctaEngine.strategyDict[strategy_name]
 
         if self.strategy.trading:
-            self.btnSwitchConnectStatus.setText(u'连接成功、启动')
-            self.log(u'连接{0}成功、启动'.format(strategy_name))
+            self.btnSwitchConnectStatus.setText('连接成功、启动')
+            self.log('连接{0}成功、启动'.format(strategy_name))
 
         else:
-            self.btnSwitchConnectStatus.setText(u'连接成功，未启动')
-            self.log(u'连接{0}成功，但策略未启动'.format(strategy_name))
+            self.btnSwitchConnectStatus.setText('连接成功，未启动')
+            self.log('连接{0}成功，但策略未启动'.format(strategy_name))
 
         self.displayGrids()
 
     def btnAddGridClick(self):
         """网格新增按钮"""
         if self.ctaEngine is None:
-            self.log(u'没有连接CTA引擎')
+            self.log('没有连接CTA引擎')
             return
 
         if self.strategy is None:
-            self.log(u'没有连接策略')
+            self.log('没有连接策略')
             return
 
-        direction = unicode(self.gridDirection.currentText())
+        direction = str(self.gridDirection.currentText())
         if direction is None or len(direction) ==0:
-            self.log(u'先选择方向')
+            self.log('先选择方向')
             return
 
         open_price = self.spinOpenPrice.value()
         close_price = self.spinClosePrice.value()
         if open_price == close_price:
-            self.log(u'开仓价和平仓价不能相同')
+            self.log('开仓价和平仓价不能相同')
             return
 
         order_volume = self.spinOrderVolume.value()
@@ -208,23 +208,23 @@ class SpreadTradeManager(QtGui.QWidget):
     def spinOpenPrice_valueChanged(self):
         """查询网格"""
         if self.ctaEngine is None:
-            self.log(u'没有连接CTA引擎')
+            self.log('没有连接CTA引擎')
             return
 
         if self.strategy is None:
-            self.log(u'没有连接策略')
+            self.log('没有连接策略')
             return
 
-        direction = unicode(self.gridDirection.currentText())
+        direction = str(self.gridDirection.currentText())
         if direction is None or len(direction) == 0:
-            self.log(u'先选择方向');
+            self.log('先选择方向');
             return
 
         open_price = self.spinOpenPrice.value()
-        grid = self.strategy.gt.getGrid(direction=direction, openPrice=open_price, t=u'OpenPrice')
+        grid = self.strategy.gt.getGrid(direction=direction, openPrice=open_price, t='OpenPrice')
 
         if grid is None:
-            self.log(u'没有找到{0}方向的网格:{1}'.format(direction, open_price))
+            self.log('没有找到{0}方向的网格:{1}'.format(direction, open_price))
             return
 
         self.spinClosePrice.setValue(grid.closePrice)
@@ -237,23 +237,23 @@ class SpreadTradeManager(QtGui.QWidget):
     def btnUpdateGridClick(self):
         """更新网格"""
         if self.ctaEngine is None:
-            self.log(u'没有连接CTA引擎')
+            self.log('没有连接CTA引擎')
             return
 
         if self.strategy is None:
-            self.log(u'没有连接策略')
+            self.log('没有连接策略')
             return
 
-        direction = unicode(self.gridDirection.currentText())
+        direction = str(self.gridDirection.currentText())
         if direction is None or len(direction) ==0:
-            self.log(u'先选择方向')
+            self.log('先选择方向')
             return
 
         open_price = self.spinOpenPrice.value()
-        grid = self.strategy.gt.getGrid(direction=direction, openPrice=open_price, t=u'OpenPrice')
+        grid = self.strategy.gt.getGrid(direction=direction, openPrice=open_price, t='OpenPrice')
 
         if grid is None:
-            self.log(u'没有找到{0}方向的网格:{1}'.format(direction,open_price))
+            self.log('没有找到{0}方向的网格:{1}'.format(direction,open_price))
             return
 
         grid.closePrice = self.spinClosePrice.value()
@@ -270,37 +270,37 @@ class SpreadTradeManager(QtGui.QWidget):
     def btnRemoveGridClick(self):
         """删除网格(指定开仓价以下的废格)"""
         if self.ctaEngine is None:
-            self.log(u'没有连接CTA引擎')
+            self.log('没有连接CTA引擎')
             return
 
         if self.strategy is None:
-            self.log(u'没有连接策略')
+            self.log('没有连接策略')
             return
 
-        direction = unicode(self.gridDirection.currentText())
+        direction = str(self.gridDirection.currentText())
         if direction is None or len(direction) == 0:
-            self.log(u'先选择方向')
+            self.log('先选择方向')
             return
 
         open_price = self.spinOpenPrice.value()
         self.strategy.gt.removeGrids(direction=direction, priceline=open_price)
         self.strategy.gt.save(direction=direction)
-        self.log(u'成功移除{0}方向的网格:{1}'.format(direction,open_price))
+        self.log('成功移除{0}方向的网格:{1}'.format(direction,open_price))
         self.displayGrids()
 
     def btnRemoveAllClick(self):
         """删除所有网格"""
         if self.ctaEngine is None:
-            self.log(u'没有连接CTA引擎')
+            self.log('没有连接CTA引擎')
             return
 
         if self.strategy is None:
-            self.log(u'没有连接策略')
+            self.log('没有连接策略')
             return
 
-        direction = unicode(self.gridDirection.currentText())
+        direction = str(self.gridDirection.currentText())
         if direction is None or len(direction) == 0:
-            self.log(u'先选择方向')
+            self.log('先选择方向')
             return
 
         if direction == DIRECTION_LONG:
