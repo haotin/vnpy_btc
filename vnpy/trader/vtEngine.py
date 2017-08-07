@@ -37,7 +37,7 @@ class MainEngine(object):
         self.eventEngine.start()
         
         # 创建数据引擎
-        self.dataEngine = DataEngine(self, self.eventEngine)
+        #self.dataEngine = DataEngine(self, self.eventEngine)
         
         # MongoDB数据库相关
         self.dbClient = None    # MongoDB客户端对象
@@ -360,7 +360,7 @@ class MainEngine(object):
     #----------------------------------------------------------------------
     def getContract(self, vtSymbol):
         """查询合约"""
-        return self.dataEngine.getContract(vtSymbol)
+        return
     
     #----------------------------------------------------------------------
     def getAllContracts(self):

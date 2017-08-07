@@ -789,7 +789,7 @@ class CtaEngine(object):
             for setting in l:
                 self.loadStrategy(setting)
     
-        self.loadPosition()
+        # self.loadPosition()
 
     # ----------------------------------------------------------------------
     def getStrategyVar(self, name):

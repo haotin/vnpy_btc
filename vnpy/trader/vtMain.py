@@ -14,7 +14,7 @@ from vnpy.trader.uiQt import qApp
 from vnpy.trader.uiMainWindow import *
 
 # 加载底层接口
-from vnpy.trader.gateway import ctpGateway
+from vnpy.trader.gateway import okcoinGateway
 # 初始化的接口模块，以及其指定的名称,CTP是模块，value，是该模块下的多个连接配置文件,如 CTP_JR_connect.json
 init_gateway_names = {'CTP': ['CTP', 'CTP_Prod', 'CTP_Post', 'CTP_EBF', 'CTP_JR', 'CTP_JR2']}
 
@@ -30,8 +30,8 @@ setup_logger(filename='logs/vnpy_{0}.log'.format(datetime.now().strftime('%m%d_%
 def main():
     """主程序入口"""
     # 重载sys模块，设置默认字符串编码方式为utf8
-    reload(sys)
-    sys.setdefaultencoding('utf8')
+    #reload(sys)
+    #sys.setdefaultencoding('utf8')
 
     """
     # 设置Windows底部任务栏图标
@@ -58,7 +58,7 @@ def main():
 
     for gw_name in init_gateway_names['CTP']:
         print('add {0}'.format(gw_name))
-        mainEngine.addGateway(ctpGateway, gw_name)
+        mainEngine.addGateway(okcoinGateway, gw_name)
 
     mainWindow = MainWindow(mainEngine, mainEngine.eventEngine)
     mainWindow.showMaximized()

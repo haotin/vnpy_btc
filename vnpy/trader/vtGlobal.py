@@ -15,7 +15,8 @@ path = os.path.abspath(os.path.dirname(__file__))
 settingFileName = os.path.join(path, settingFileName)
 
 try:
-    f = file(settingFileName)
+    f = open(settingFileName, 'r' , encoding='GB18030')
+
     globalSetting = json.load(f)
 except:
     traceback.print_exc()

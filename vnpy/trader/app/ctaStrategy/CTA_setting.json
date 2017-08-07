@@ -1,7 +1,0 @@
-[
-   {
-        "name": "strategyAtrRsi",
-        "className": "AtrRsiStrategy",
-        "vtSymbol": "j1709"
-    }
-]

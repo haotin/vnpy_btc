@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 
-from .okcoinGateway import *
+from okcoinGateway import *
 
 
 def test():
@@ -11,17 +11,18 @@ def test():
 
     def print_log(event):
         log = event.dict_['data']
+
         print(':'.join([log.logTime, log.logContent]))
 
     app = QtCore.QCoreApplication(sys.argv)
 
     eventEngine = EventEngine()
-    eventEngine.register(EVENT_LOG, print_log)
+    #eventEngine.register(EVENT_LOG, print_log)
     eventEngine.start()
 
     gateway = OkcoinGateway(eventEngine)
     gateway.connect()
-    gateway.qryAccount()
+    # gateway.qryAccount()
     sys.exit(app.exec_())
 
 

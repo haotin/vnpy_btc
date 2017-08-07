@@ -2,7 +2,7 @@
 
 import os
 
-from .setup_logger import setup_logger
+from setup_logger import setup_logger
 from vnpy.trader.util_monitor import *
 from vnpy.trader.vtEngine import MainEngine
 from vnpy.trader.gateway import okcoinGateway

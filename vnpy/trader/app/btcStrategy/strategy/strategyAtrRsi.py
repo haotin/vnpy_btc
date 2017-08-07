@@ -13,7 +13,7 @@
 import os
 import sys
 
-import talib
+#import talib
 import numpy as np
 
 from vnpy.trader.app.ctaStrategy.ctaBase import *
@@ -122,7 +122,7 @@ class AtrRsiStrategy(CtaTemplate):
         """收到行情TICK推送（必须由用户继承实现）"""
         # 计算K线
         tickMinute = tick.datetime.minute
-
+        print (tick.lastPrice)
         if tickMinute != self.barMinute:
             if self.bar:
                 self.onBar(self.bar)

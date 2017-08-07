@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-from .vnokcoin import *
+from vnokcoin import *
 import time
 # 在OkCoin网站申请这两个Key，分别对应用户名和密码
 '''
@@ -30,7 +30,7 @@ api.subscribeSpotDepth(SYMBOL_BTC, DEPTH_20)
 # 测试现货交易API
 #api.subscribeSpotTrades()
 # d = api.subscribeSpotUserInfo()
-# api.spotUserInfo()
+#api.spotUserInfo()
 #api.spotTrade(symbol, type_, price, amount)
 #api.spotCancelOrder(symbol, orderid)
 #api.spotOrderInfo(symbol, orderid)

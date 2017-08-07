@@ -13,7 +13,7 @@
 import os
 import sys
 
-import talib
+# import talib
 import numpy as np
 
 from vnpy.trader.app.btcStrategy.btcBase import *
@@ -149,10 +149,10 @@ class AtrRsiStrategy(CtaTemplate):
             bar.high = max(bar.high, tick.lastPrice)
             bar.low = min(bar.low, tick.lastPrice)
             bar.close = tick.lastPrice
-            print(tick.lastPrice)
+        print(tick.lastPrice)
     #----------------------------------------------------------------------
     def onBar(self, bar):
-        """收到Bar推送（必须由用户继承实现）"""
+        """收到Bar推送（必须由用户继承实现）
         # 撤销之前发出的尚未成交的委托（包括限价单和停止单）
         for orderID in self.orderList:
             self.cancelOrder(orderID)
@@ -228,7 +228,7 @@ class AtrRsiStrategy(CtaTemplate):
 
         # 发出状态更新事件
         self.putEvent()
-
+        """
     #----------------------------------------------------------------------
     def onOrder(self, order):
         """收到委托变化推送（必须由用户继承实现）"""

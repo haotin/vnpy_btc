@@ -126,8 +126,11 @@ def on_open(self):
     #futureRealTradesMsg = futureRealTrades(api_key,secret_key)
     #self.send(futureRealTradesMsg)
 def on_message(self,evt):
+
+    # print (type(evt))
     data = inflate(evt) #data decompress
     print (data)
+
 def inflate(data):
     decompress = zlib.decompressobj(
             -zlib.MAX_WBITS  # see above

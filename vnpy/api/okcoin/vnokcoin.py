@@ -100,14 +100,19 @@ class OkCoinApi(object):
     def readData(self, evt):
         """解压缩推送收到的数据"""
         # 创建解压器
+
         decompress = zlib.decompressobj(-zlib.MAX_WBITS)
-        
+        # evt编码转换
+        #evt = evt.encode()
         # 将原始数据解压成字符串
-        inflated = decompress.decompress(evt) + decompress.flush()
-        
+        inflated = decompress.decompress(evt)
+        inflated += decompress.flush()
+
         # 通过json解析字符串
+        inflated = inflated.decode()
         data = json.loads(inflated)
-        
+        #data = inflated
+
         return data
     
     #----------------------------------------------------------------------
@@ -126,7 +131,6 @@ class OkCoinApi(object):
         print ('onMessage')
         data = self.readData(evt)
         print (data)
-        
     #----------------------------------------------------------------------
     def onError(self, ws, evt):
         """错误推送"""

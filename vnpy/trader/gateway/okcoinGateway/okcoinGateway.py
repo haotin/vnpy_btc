@@ -112,7 +112,7 @@ class OkcoinGateway(VtGateway):
         fileName = os.path.join(path, fileName)
         
         try:
-            f = file(fileName)
+            f = open(fileName, 'r', encoding='GB18030')
         except IOError:
             log = VtLogData()
             log.gatewayName = self.gatewayName
@@ -259,6 +259,7 @@ class Api(vnokcoin.OkCoinApi):
     def onMessage(self, ws, evt):
         """信息推送""" 
         data = self.readData(evt)[0]
+        # print (data)
         channel = data['channel']
         callback = self.cbDict[channel]
         callback(data)
