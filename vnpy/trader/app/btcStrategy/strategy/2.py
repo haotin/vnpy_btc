@@ -1,19 +1,13 @@
-# encoding: UTF-8
+﻿# encoding: UTF-8
 
 """
-一个ATR-RSI指标结合的交易策略，适合用在股指的1分钟和5分钟线上。
-
-注意事项：
-1. 作者不对交易盈利做任何保证，策略代码仅供参考
-2. 本策略需要用到talib，没有安装的用户请先参考www.vnpy.org上的教程安装
-3. 将IF0000_1min.csv用ctaHistoryData.py导入MongoDB后，直接运行本文件即可回测策略
-
+多合约套利 。从不同接口拿取数据。
 """
 
 import os
 import sys
 
-# import talib
+#import talib
 import numpy as np
 
 from vnpy.trader.app.btcStrategy.btcBase import *
@@ -99,9 +93,9 @@ class AtrRsiStrategy(CtaTemplate):
         self.rsiSell = 50 - self.rsiEntry
 
         # 载入历史数据，并采用回放计算的方式初始化策略数值
-        # initData = self.loadBar(self.initDays)
-        # for bar in initData:
-        #     self.onBar(bar)
+        initData = self.loadBar(self.initDays)
+        for bar in initData:
+            self.onBar(bar)
 
         self.putEvent()
 
@@ -122,7 +116,8 @@ class AtrRsiStrategy(CtaTemplate):
         """收到行情TICK推送（必须由用户继承实现）"""
         # 计算K线
         tickMinute = tick.datetime.minute
-
+        print (tick.lastPrice)
+        print (tick.vtSymbol)
         if tickMinute != self.barMinute:
             if self.bar:
                 self.onBar(self.bar)
@@ -149,10 +144,10 @@ class AtrRsiStrategy(CtaTemplate):
             bar.high = max(bar.high, tick.lastPrice)
             bar.low = min(bar.low, tick.lastPrice)
             bar.close = tick.lastPrice
-        print(tick.lastPrice)
+
     #----------------------------------------------------------------------
     def onBar(self, bar):
-        """收到Bar推送（必须由用户继承实现）
+        """收到Bar推送（必须由用户继承实现）"""
         # 撤销之前发出的尚未成交的委托（包括限价单和停止单）
         for orderID in self.orderList:
             self.cancelOrder(orderID)
@@ -228,7 +223,7 @@ class AtrRsiStrategy(CtaTemplate):
 
         # 发出状态更新事件
         self.putEvent()
-        """
+
     #----------------------------------------------------------------------
     def onOrder(self, order):
         """收到委托变化推送（必须由用户继承实现）"""
@@ -238,4 +233,3 @@ class AtrRsiStrategy(CtaTemplate):
     def onTrade(self, trade):
         # 发出状态更新事件
         self.putEvent()
-

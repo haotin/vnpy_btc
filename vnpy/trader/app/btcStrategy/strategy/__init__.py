@@ -27,6 +27,7 @@ for root, subdirs, files in os.walk(path):
             try:
                 # 使用importlib动态载入模块
                 module = importlib.import_module(moduleName)
+                print (module)
             except Exception as ex:
                 print('load fail,excepion:{0}'.format(ex))
                 continue

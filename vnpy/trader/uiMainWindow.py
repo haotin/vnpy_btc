@@ -5,7 +5,7 @@
 print('load uiMainWindows.py')
 import psutil
 
-#from vnpy.trader.app.btcStrategy.uiCtaWidget import CtaEngineManager
+from vnpy.trader.app.ctaStrategy.uiCtaWidget import CtaEngineManager
 from vnpy.trader.app.dataRecorder.uiDrWidget import DrEngineManager
 from vnpy.trader.app.riskManager.uiRmWidget import RmEngineManager
 from .uiBasicWidget import *

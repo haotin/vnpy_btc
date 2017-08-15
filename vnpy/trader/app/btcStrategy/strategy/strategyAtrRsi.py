@@ -16,8 +16,8 @@ import sys
 #import talib
 import numpy as np
 
-from vnpy.trader.app.ctaStrategy.ctaBase import *
-from vnpy.trader.app.ctaStrategy.ctaTemplate import CtaTemplate
+from vnpy.trader.app.btcStrategy.btcBase import *
+from vnpy.trader.app.btcStrategy.btcTemplate import CtaTemplate
 
 
 ########################################################################
@@ -123,6 +123,7 @@ class AtrRsiStrategy(CtaTemplate):
         # 计算K线
         tickMinute = tick.datetime.minute
         print (tick.lastPrice)
+        print (tick.vtSymbol)
         if tickMinute != self.barMinute:
             if self.bar:
                 self.onBar(self.bar)
