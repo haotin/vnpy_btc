@@ -100,14 +100,14 @@ class NoUiMain(object):
 
 def run_noui():
 
-    # try:
-    #     log_file_name = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-    #                                              'logs', u'noUiMain.log'))
-    # except Exception as ex:
-    #     print u'Use local dict:{0}'.format(os.getcwd())
-    #     log_file_name = os.path.abspath(os.path.join(os.getcwd(), 'logs', u'noUiMain.log'))
-    #
-    # setup_logger(filename=log_file_name, debug=False)
+    try:
+        log_file_name = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                 'logs', u'noUiMain.log'))
+    except Exception as ex:
+        print (u'Use local dict:{0}'.format(os.getcwd()))
+        log_file_name = os.path.abspath(os.path.join(os.getcwd(), 'logs', u'noUiMain.log'))
+
+    setup_logger(filename=log_file_name, debug=False)
     noUi = NoUiMain()
     noUi.Start()
 

@@ -57,6 +57,9 @@ LTC_USD_QUARTER = 'LTC_USD_QUARTER'
 # CNY
 BTC_CNY_SPOT = 'BTC_CNY_SPOT'
 LTC_CNY_SPOT = 'LTC_CNY_SPOT'
+ETH_CNY_SPOT = 'ETH_CNY_SPOT'
+ETC_CNY_SPOT = 'ETC_CNY_SPOT'
+
 
 # 印射字典
 spotSymbolMap = {}
@@ -64,6 +67,9 @@ spotSymbolMap['ltc_usd'] = LTC_USD_SPOT
 spotSymbolMap['btc_usd'] = BTC_USD_SPOT
 spotSymbolMap['ltc_cny'] = LTC_CNY_SPOT
 spotSymbolMap['btc_cny'] = BTC_CNY_SPOT
+spotSymbolMap['eth_cny'] = ETH_CNY_SPOT
+spotSymbolMap['etc_cny'] = ETC_CNY_SPOT
+
 spotSymbolMapReverse = {v: k for k, v in list(spotSymbolMap.items())}
 
 
@@ -82,9 +88,14 @@ channelSymbolMap['ok_sub_spotusd_ltc_depth_20'] = LTC_USD_SPOT
 # CNY
 channelSymbolMap['ok_sub_spotcny_btc_ticker'] = BTC_CNY_SPOT
 channelSymbolMap['ok_sub_spotcny_ltc_ticker'] = LTC_CNY_SPOT
+channelSymbolMap['ok_sub_spotcny_eth_ticker'] = ETH_CNY_SPOT
+channelSymbolMap['ok_sub_spotcny_etc_ticker'] = ETC_CNY_SPOT
+
 
 channelSymbolMap['ok_sub_spotcny_btc_depth_20'] = BTC_CNY_SPOT
 channelSymbolMap['ok_sub_spotcny_ltc_depth_20'] = LTC_CNY_SPOT
+channelSymbolMap['ok_sub_spotcny_eth_depth_20'] = ETH_CNY_SPOT
+channelSymbolMap['ok_sub_spotcny_etc_depth_20'] = ETC_CNY_SPOT
 
 
 
@@ -306,6 +317,8 @@ class Api(vnokcoin.OkCoinApi):
         
         self.spotOrderInfo(vnokcoin.TRADING_SYMBOL_LTC, '-1')
         self.spotOrderInfo(vnokcoin.TRADING_SYMBOL_BTC, '-1')
+        self.spotOrderInfo(vnokcoin.TRADING_SYMBOL_ETH, '-1')
+        #self.spotOrderInfo(vnokcoin.TRADING_SYMBOL_ETC, '-1')
         
         # 连接后订阅现货的成交和账户数据
         self.subscribeSpotTrades()
@@ -313,9 +326,15 @@ class Api(vnokcoin.OkCoinApi):
         
         self.subscribeSpotTicker(vnokcoin.SYMBOL_BTC)
         self.subscribeSpotTicker(vnokcoin.SYMBOL_LTC)
+        self.subscribeSpotTicker(vnokcoin.SYMBOL_ETH)
+        #self.subscribeSpotTicker(vnokcoin.SYMBOL_ETC)
+
         
         self.subscribeSpotDepth(vnokcoin.SYMBOL_BTC, vnokcoin.DEPTH_20)
         self.subscribeSpotDepth(vnokcoin.SYMBOL_LTC, vnokcoin.DEPTH_20)
+        self.subscribeSpotDepth(vnokcoin.SYMBOL_ETH, vnokcoin.DEPTH_20)
+        #self.subscribeSpotDepth(vnokcoin.SYMBOL_ETC, vnokcoin.DEPTH_20)
+
         
         # 如果连接的是USD网站则订阅期货相关回报数据
         if self.currency == vnokcoin.CURRENCY_USD:
@@ -347,9 +366,13 @@ class Api(vnokcoin.OkCoinApi):
         # USD_SPOT
         self.cbDict['ok_sub_spotusd_btc_ticker'] = self.onTicker
         self.cbDict['ok_sub_spotusd_ltc_ticker'] = self.onTicker
+        self.cbDict['ok_sub_spotusd_eth_ticker'] = self.onTicker
+        #self.cbDict['ok_sub_spotusd_etc_ticker'] = self.onTicker
         
         self.cbDict['ok_sub_spotusd_btc_depth_20'] = self.onDepth
         self.cbDict['ok_sub_spotusd_ltc_depth_20'] = self.onDepth
+        self.cbDict['ok_sub_spotusd_eth_depth_20'] = self.onTicker
+        #self.cbDict['ok_sub_spotusd_etc_depth_20'] = self.onTicker
         
         self.cbDict['ok_spotusd_userinfo'] = self.onSpotUserInfo
         self.cbDict['ok_spotusd_orderinfo'] = self.onSpotOrderInfo
@@ -363,9 +386,11 @@ class Api(vnokcoin.OkCoinApi):
         # CNY_SPOT
         self.cbDict['ok_sub_spotcny_btc_ticker'] = self.onTicker
         self.cbDict['ok_sub_spotcny_ltc_ticker'] = self.onTicker        
-        
+        self.cbDict['ok_sub_spotcny_eth_ticker'] = self.onTicker
+
         self.cbDict['ok_sub_spotcny_btc_depth_20'] = self.onDepth
         self.cbDict['ok_sub_spotcny_ltc_depth_20'] = self.onDepth
+        self.cbDict['ok_sub_spotcny_eth_depth_20'] = self.onDepth
         
         self.cbDict['ok_spotcny_userinfo'] = self.onSpotUserInfo
         self.cbDict['ok_spotcny_orderinfo'] = self.onSpotOrderInfo
@@ -617,6 +642,8 @@ class Api(vnokcoin.OkCoinApi):
         
         contractList.append(self.generateSpecificContract(contract, BTC_CNY_SPOT))
         contractList.append(self.generateSpecificContract(contract, LTC_CNY_SPOT))
+        contractList.append(self.generateSpecificContract(contract, ETH_CNY_SPOT))
+        contractList.append(self.generateSpecificContract(contract, ETC_CNY_SPOT))
         
         return contractList
     

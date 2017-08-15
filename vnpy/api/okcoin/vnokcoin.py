@@ -20,6 +20,8 @@ CURRENCY_USD = 'usd'
 # 电子货币代码
 SYMBOL_BTC = 'btc'
 SYMBOL_LTC = 'ltc'
+SYMBOL_ETH = 'eth'
+SYMBOL_ETC = 'etc'
 
 # 行情深度
 DEPTH_20 = 20
@@ -42,6 +44,8 @@ INTERVAL_1W = 'week'
 # 交易代码，需要后缀货币名才能完整
 TRADING_SYMBOL_BTC = 'btc_'
 TRADING_SYMBOL_LTC = 'ltc_'
+TRADING_SYMBOL_ETH = 'eth_'
+TRADING_SYMBOL_ETC = 'etc_'
 
 # 委托类型
 TYPE_BUY = 'buy'
@@ -105,6 +109,7 @@ class OkCoinApi(object):
         # evt编码转换
         #evt = evt.encode()
         # 将原始数据解压成字符串
+        #if type(evt) ==
         inflated = decompress.decompress(evt)
         inflated += decompress.flush()
 

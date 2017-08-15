@@ -92,7 +92,7 @@ def futureRealTrades(api_key,secretkey):
 
 def on_open(self):
     #subscribe okcoin.com spot ticker
-    self.send("{'event':'addChannel','channel':'ok_sub_spotusd_btc_ticker','binary':'true'}")
+    self.send("{'event':'addChannel','channel':'ok_sub_spotcny_eth_ticker','binary':'true'}")
 
     #subscribe okcoin.com future this_week ticker
     #self.send("{'event':'addChannel','channel':'ok_sub_futureusd_btc_ticker_this_week','binary':'true'}")
@@ -146,7 +146,7 @@ def on_close(self,evt):
     print ('DISCONNECT')
 
 if __name__ == "__main__":
-    url = "wss://real.okcoin.com:10440/websocket/okcoinapi"      #if okcoin.cn  change url wss://real.okcoin.cn:10440/websocket/okcoinapi
+    url = "wss://real.okcoin.cn:10440/websocket/okcoinapi"      #if okcoin.cn  change url wss://real.okcoin.cn:10440/websocket/okcoinapi
     api_key='your api_key which you apply'
     secret_key = "your secret_key which you apply"
 

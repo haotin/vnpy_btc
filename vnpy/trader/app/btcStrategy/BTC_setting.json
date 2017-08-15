@@ -2,6 +2,6 @@
    {
         "name": "strategyAtrRsi",
         "className": "AtrRsiStrategy",
-        "vtSymbol": "BTC_CNY_SPOT;LTC_CNY_SPOT"
+        "vtSymbol": "BTC_CNY_SPOT;LTC_CNY_SPOT;;ETH_CNY_SPOT"
     }
 ]

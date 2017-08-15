@@ -1,0 +1,15 @@
+INFO: [2017-08-01 10:05:22.707][btcEngine.py:582][8872:Thread-1] StrategyName:基类设置参数
+INFO: [2017-08-01 10:05:22.709][btcEngine.py:582][8872:Thread-1] 添加合约btc_cny与策略的匹配目录
+INFO: [2017-08-01 10:05:22.709][btcEngine.py:582][8872:Thread-1] 向gateway订阅合约btc_cny
+INFO: [2017-08-01 10:05:22.709][btcEngine.py:582][8872:Thread-1] 交易合约btc_cny无法找到，添加到待订阅列表
+INFO: [2017-08-01 10:05:22.709][vtEngine.py:226][8872:Thread-1] 数据查询失败，MongoDB没有连接
+INFO: [2017-08-01 10:05:22.709][btcEngine.py:582][8872:Thread-1] strategyAtrRsi:strategyAtrRsi策略初始化
+INFO: [2017-08-01 10:05:22.709][vtEngine.py:226][8872:Thread-1] 数据查询失败，MongoDB没有连接
+INFO: [2017-08-01 10:05:22.709][btcEngine.py:582][8872:Thread-1] strategyAtrRsi:strategyAtrRsi策略启动
+INFO: [2017-08-01 10:05:22.710][vtGateway.py:108][8872:Thread-1] 接口初始化成功
+INFO: [2017-08-01 10:05:23.907][vtGateway.py:108][8872:Thread-5] 服务器连接成功
+INFO: [2017-08-01 10:05:23.960][vtEngine.py:226][8872:Thread-2] 找不到合约btc信息
+INFO: [2017-08-01 10:05:23.961][vtEngine.py:226][8872:Thread-2] 找不到合约ltc信息
+INFO: [2017-08-01 10:05:23.963][vtEngine.py:226][8872:Thread-2] 找不到合约cny信息
+ERROR: [2017-08-01 10:05:52.778][vtEngine.py:238][8872:Thread-1] MongoDB连接失败
+INFO: [2017-08-01 10:05:52.779][util_monitor.py:80][8872:Thread-2] 错误代码:  错误信息: MongoDB连接失败 补充信息:  接口: 
