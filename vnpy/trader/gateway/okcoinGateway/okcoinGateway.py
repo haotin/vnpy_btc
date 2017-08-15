@@ -402,6 +402,19 @@ class Api(vnokcoin.OkCoinApi):
         self.cbDict['ok_spotcny_cancel_order'] = self.onSpotCancelOrder        
 
         # USD_FUTURES
+        # todo：期货行情返回。
+        self.cbDict['ok_sub_spotusd_btc_ticker'] = self.onTicker
+        self.cbDict['ok_sub_spotusd_ltc_ticker'] = self.onTicker
+        self.cbDict['ok_sub_spotusd_eth_ticker'] = self.onTicker
+        #self.cbDict['ok_sub_spotusd_etc_ticker'] = self.onTicker
+
+        self.cbDict['ok_sub_spotusd_btc_depth_20'] = self.onDepth
+        self.cbDict['ok_sub_spotusd_ltc_depth_20'] = self.onDepth
+        self.cbDict['ok_sub_spotusd_eth_depth_20'] = self.onTicker
+
+
+
+
         
     #----------------------------------------------------------------------
     def onTicker(self, data):
